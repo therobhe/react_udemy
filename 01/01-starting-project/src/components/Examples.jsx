@@ -1,15 +1,19 @@
-import TabButton from "./TabButton";
+/**
+ * Import subcomponents
+ */
+import TabMenu from "./TabMenu";
 import Section from "./Section";
 
 /**
  * Import data
  */
-import { EXAMPLES } from "../data/data";
+import {EXAMPLES} from "../data/data";
 
 /**
  * Import hooks
  */
-import { useState } from "react";
+import {useState} from "react";
+import TabButton from "./TabButton";
 
 /**
  * Examples view
@@ -19,6 +23,10 @@ import { useState } from "react";
  */
 function Examples() {
     const [ activeTab, setActiveTab ] = useState();
+
+    function handleSelect(newActiveTab) {
+        setActiveTab(newActiveTab);
+    }
 
     let tabContent = <p>Please select a topic.</p>;
     if (activeTab) {
@@ -32,49 +40,50 @@ function Examples() {
             </div>
     }
 
-    function handleSelect(newActiveTab) {
-        setActiveTab(newActiveTab);
-    }
-
     return (
         <Section id="examples">
             <h2>Examples</h2>
-            <menu>
-                <TabButton
-                    onClick={() => {
-                        handleSelect('components')
-                    }}
-                    isSelected={activeTab === 'components'}
-                >
-                    COMPONENTS
-                </TabButton>
-                <TabButton
-                    onClick={() => {
-                        handleSelect('jsx')
-                    }}
-                    isSelected={activeTab === 'jsx'}
-                >
-                    JSX
-                </TabButton>
-                <TabButton
-                    onClick={() => {
-                        handleSelect('props')
-                    }}
-                    isSelected={activeTab === 'props'}
+            <TabMenu
+                // ContainerElement="ul", this would override the default prop
+                buttons={
+                <>
+                    <TabButton
+                        onClick={() => {
+                            handleSelect('components')
+                        }}
+                        isSelected={activeTab === 'components'}
+                    >
+                        COMPONENTS
+                    </TabButton>
+                    <TabButton
+                        onClick={() => {
+                            handleSelect('jsx')
+                        }}
+                        isSelected={activeTab === 'jsx'}
+                    >
+                        JSX
+                    </TabButton>
+                    <TabButton
+                        onClick={() => {
+                            handleSelect('props')
+                        }}
+                        isSelected={activeTab === 'props'}
 
-                >
-                    PROPS
-                </TabButton>
-                <TabButton
-                    onClick={() => {
-                        handleSelect('state')
-                    }}
-                    isSelected={activeTab === 'state'}
-                >
-                    STATE
-                </TabButton>
-            </menu>
-            {tabContent}
+                    >
+                        PROPS
+                    </TabButton>
+                    <TabButton
+                        onClick={() => {
+                            handleSelect('state')
+                        }}
+                        isSelected={activeTab === 'state'}
+                    >
+                        STATE
+                    </TabButton>
+                </>
+            }>
+                {tabContent}
+            </TabMenu>
         </Section>
     );
 }

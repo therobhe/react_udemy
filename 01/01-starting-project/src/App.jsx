@@ -1,5 +1,5 @@
 /**
- * Import components
+ * Import subcomponents
  */
 import Header from "./components/Header";
 import CoreConcepts from "./components/CoreConcepts";
