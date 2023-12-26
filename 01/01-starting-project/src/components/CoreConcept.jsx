@@ -1,3 +1,12 @@
+/**
+ * CoreConceptItem
+ *
+ * @param image
+ * @param title
+ * @param description
+ * @returns {JSX.Element}
+ * @constructor
+ */
 function CoreConcept( { image, title, description } ) {
     return (
         <li>
