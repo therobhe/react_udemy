@@ -11,7 +11,7 @@ import { useState } from "react"
  * @returns {JSX.Element}
  * @constructor
  */
-function Player( {initialName, symbol} ) {
+function Player( {initialName, symbol, isActive} ) {
     /**
      * States
      */
@@ -31,7 +31,7 @@ function Player( {initialName, symbol} ) {
     }
 
     return (
-    <li>
+    <li className={isActive ? "active" : undefined}>
         <span className="player">
             {!isEditing && <span className="player-name">{playerName}</span>}
             {isEditing && <input type="text" value={playerName} onChange={handleChange} required/>}
