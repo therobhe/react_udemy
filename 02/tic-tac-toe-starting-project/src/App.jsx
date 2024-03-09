@@ -20,7 +20,7 @@ function App() {
         setGameTurns((prevTurn) => {
             let currentPlayer = "X" // used to prevent merging states
 
-            if (prevTurn.length > 0 && prevTurn[0].player === "X") {
+            if (prevTurn.length > 0 && prevTurn[0].player == "X") {
                 currentPlayer = "O"
             }
 
