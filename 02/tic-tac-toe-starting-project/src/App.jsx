@@ -8,28 +8,31 @@ import Log from "./components/Log.jsx";
 /**
  * Import hooks
  */
-import { useState } from "react"
+import {useState} from "react"
+
+function deriveActivePlayer(gameTurns) {
+    // derive active player symbol from the turns-list
+    let currentPlayer = "X"
+    if (gameTurns.length > 0 && gameTurns[0].player === "X") {
+        currentPlayer = "O"
+    }
+    return currentPlayer
+}
 
 function App() {
-    const [activePlayer, setActivePlayer] = useState("X")
     const [gameTurns, setGameTurns] = useState([])
 
+    const activePlayer = deriveActivePlayer(gameTurns)
+
     const handleSelectSquare = (rowIndex, colIndex) => {
-        setActivePlayer((currPlayer) => currPlayer === "X" ? "O" : "X")
 
         setGameTurns((prevTurn) => {
-            let currentPlayer = "X" // used to prevent merging states
+            const currentPlayer = deriveActivePlayer(prevTurn)
 
-            if (prevTurn.length > 0 && prevTurn[0].player == "X") {
-                currentPlayer = "O"
-            }
-
-
-            const updatedTurns = [
+            return [
                 {square: {row: rowIndex, col: colIndex}, player: currentPlayer},
                 ...prevTurn
             ]
-            return updatedTurns
         })
     }
 
@@ -45,7 +48,7 @@ function App() {
             </div>
 
             <div>
-                <Log gameTurns={gameTurns}/>
+                <Log turns={gameTurns}/>
             </div>
         </main>
     )

@@ -1,22 +1,23 @@
 /**
  * Hook imports
  */
-import { useState } from "react"
+import {useState} from "react"
 
 /**
  * Player Component - representation of a player with his name and chosen symbol
  *
  * @param initialName - default value that can be transmitted as a prop
  * @param symbol - the symbol the player plays with
+ * @param isActive - determines if it is one players turn
  * @returns {JSX.Element}
  * @constructor
  */
-function Player( {initialName, symbol, isActive} ) {
+function Player({initialName, symbol, isActive}) {
     /**
      * States
      */
-    const [ playerName, setPlayerName ] = useState(initialName)
-    const [ isEditing, setIsEditing ] = useState(false)
+    const [playerName, setPlayerName] = useState(initialName)
+    const [isEditing, setIsEditing] = useState(false)
 
     /**
      * Custom Event Handler Functions
@@ -31,14 +32,14 @@ function Player( {initialName, symbol, isActive} ) {
     }
 
     return (
-    <li className={isActive ? "active" : undefined}>
+        <li className={isActive ? "active" : undefined}>
         <span className="player">
             {!isEditing && <span className="player-name">{playerName}</span>}
             {isEditing && <input type="text" value={playerName} onChange={handleChange} required/>}
             <span className="player-symbol">{symbol}</span>
         </span>
-        <button onClick={handleEditClick}>{!isEditing ? "Edit" : "Save"}</button>
-    </li>
+            <button onClick={handleEditClick}>{!isEditing ? "Edit" : "Save"}</button>
+        </li>
     )
 }
 
