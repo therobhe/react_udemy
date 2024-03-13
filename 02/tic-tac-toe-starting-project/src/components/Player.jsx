@@ -9,10 +9,11 @@ import {useState} from "react"
  * @param initialName - default value that can be transmitted as a prop
  * @param symbol - the symbol the player plays with
  * @param isActive - determines if it is one players turn
+ * @param onChangeName - callback function that sets the name for the game over screen
  * @returns {JSX.Element}
  * @constructor
  */
-function Player({initialName, symbol, isActive}) {
+function Player({initialName, symbol, isActive, onChangeName}) {
     /**
      * States
      */
@@ -25,6 +26,9 @@ function Player({initialName, symbol, isActive}) {
     const handleEditClick = () => {
         // bad practice: setIsEditing(!isEditing) --> would be scheduled & not immediately executed
         setIsEditing((editing) => !editing) // guarantees to work with the latest available state
+        if (isEditing) {
+            onChangeName(symbol, playerName)
+        }
     }
     // onChange automatically includes the event that has happenend (keystroke etc.) and the target this event has occured on (input field in this case)
     const handleChange = (event) => {
