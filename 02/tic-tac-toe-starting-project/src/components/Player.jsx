@@ -1,7 +1,7 @@
 /**
  * Hook imports
  */
-import { useState } from 'react';
+import { useState } from 'react'
 
 /**
  * Player Component - representation of a player with his name and chosen symbol
@@ -17,23 +17,23 @@ function Player({ initialName, symbol, isActive, onChangeName }) {
 	/**
 	 * States
 	 */
-	const [playerName, setPlayerName] = useState(initialName);
-	const [isEditing, setIsEditing] = useState(false);
+	const [playerName, setPlayerName] = useState(initialName)
+	const [isEditing, setIsEditing] = useState(false)
 
 	/**
 	 * Custom Event Handler Functions
 	 */
 	const handleEditClick = () => {
 		// bad practice: setIsEditing(!isEditing) --> would be scheduled & not immediately executed
-		setIsEditing((editing) => !editing); // guarantees to work with the latest available state
+		setIsEditing((editing) => !editing) // guarantees to work with the latest available state
 		if (isEditing) {
-			onChangeName(symbol, playerName);
+			onChangeName(symbol, playerName)
 		}
-	};
+	}
 	// onChange automatically includes the event that has happenend (keystroke etc.) and the target this event has occured on (input field in this case)
 	const handleChange = (event) => {
-		setPlayerName(event.target.value);
-	};
+		setPlayerName(event.target.value)
+	}
 
 	return (
 		<li className={isActive ? 'active' : undefined}>
@@ -51,7 +51,7 @@ function Player({ initialName, symbol, isActive, onChangeName }) {
 			</span>
 			<button onClick={handleEditClick}>{!isEditing ? 'Edit' : 'Save'}</button>
 		</li>
-	);
+	)
 }
 
-export default Player;
+export default Player

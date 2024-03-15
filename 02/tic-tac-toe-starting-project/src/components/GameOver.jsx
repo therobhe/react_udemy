@@ -7,5 +7,5 @@ export default function GameOver({ winningPlayer, initRematch }) {
 				<button onClick={initRematch}>Rematch!</button>
 			</p>
 		</div>
-	);
+	)
 }
