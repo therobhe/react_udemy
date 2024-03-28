@@ -4,8 +4,8 @@ export default function InputGroup({ labelText, valueKey, onInput }) {
             <label htmlFor={labelText}>{labelText}</label>
             <input id={labelText}
                    type="number"
-                   onChange={(input) => {
-                       onInput(valueKey, input.target.value)
+                   onChange={(event) => {
+                       onInput(valueKey, Number(event.target.value))
                    }}
             />
         </div>
