@@ -17,20 +17,18 @@ export default function Result({ userInput, investmentData }) {
                 </tr>
                 </thead>
 
-                {/*here loop must happen over entire data array*/}
                 <tbody>
-                {/*for each entry create a row and fill in the values*/}
-                {investmentData.map((entry, index) => {
-                    return (
-                        <tr key={index}>
-                            <td>{entry.year}</td>
-                            <td>{formatter.format(entry.valueEndOfYear)}</td>
-                            <td>{formatter.format(entry.interest)}</td>
-                            <td>{formatter.format(entry.valueEndOfYear - (entry.year * annualInvest + initInvest))}</td>
-                            <td>{formatter.format(entry.year * annualInvest + initInvest)}</td>
-                        </tr>
-                    )
-                })}
+                    {investmentData.map((entry, index) => {
+                        return (
+                            <tr key={index}>
+                                <td>{entry.year}</td>
+                                <td>{formatter.format(entry.valueEndOfYear)}</td>
+                                <td>{formatter.format(entry.interest)}</td>
+                                <td>{formatter.format(entry.valueEndOfYear - (entry.year * annualInvest + initInvest))}</td>
+                                <td>{formatter.format(entry.year * annualInvest + initInvest)}</td>
+                            </tr>
+                        )
+                    })}
                 </tbody>
             </table>
         </div>
