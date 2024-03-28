@@ -10,15 +10,23 @@ function App() {
      * Fetch input data, send them into array-function, loop through array and format data in result
      */
     const [fetchedData, setFetchedData] = useState({})
+    const [showResult, setShowResult] = useState(false)
     let calculatedInvestment = calculateInvestmentResults((fetchedData))
 
     const userInputCallback = (keyFromInput, valueFromInput) => {
         const updatedState = {...fetchedData}
-              updatedState[keyFromInput] = valueFromInput
-              setFetchedData(updatedState)
+        if (valueFromInput === "") {
+            delete updatedState[keyFromInput]
+        } else {
+            updatedState[keyFromInput] = valueFromInput
+        }
+        setFetchedData(updatedState)
 
-        if (Object.keys(fetchedData).length === 4) {
-            calculatedInvestment = calculateInvestmentResults(fetchedData)
+        if (Object.keys(updatedState).length === 4) {
+            calculatedInvestment = calculateInvestmentResults(updatedState)
+            setShowResult(prev => !prev)
+        } else {
+            setShowResult(false)
         }
     }
 
@@ -26,7 +34,9 @@ function App() {
       <>
         <Header />
         <UserInput onInput={userInputCallback} />
-        <Result investmentData={calculatedInvestment} />
+        {!showResult
+            ? <h2 className={"center"}>Please enter you data above</h2>
+            : <Result investmentData={calculatedInvestment} />}
       </>
   )
 }
