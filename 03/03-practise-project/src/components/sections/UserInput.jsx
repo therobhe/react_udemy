@@ -1,11 +1,15 @@
 import InputGroup from "../ui/InputGroup.jsx"
-export default function UserInput() {
+export default function UserInput( {onInput} ) {
     return (
         <div id={"user-input"} className={"input-group"}>
-            <InputGroup labelText={"Initial Investment"} />
-            <InputGroup labelText={"Annual Investment"} />
-            <InputGroup labelText={"Expected Return"} />
-            <InputGroup labelText={"Duration"} />
+            <div className={"col"}>
+                <InputGroup labelText={"Initial Investment"} valueKey={"initialInvestment"} onInput={onInput} />
+                <InputGroup labelText={"Annual Investment"} valueKey={"annualInvestment"} onInput={onInput} />
+            </div>
+            <div className={"col"}>
+                <InputGroup labelText={"Expected Return"} valueKey={"expectedReturn"} onInput={onInput} />
+                <InputGroup labelText={"Duration"} valueKey={"duration"} onInput={onInput} />
+            </div>
         </div>
     )
 }

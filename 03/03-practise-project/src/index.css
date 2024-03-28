@@ -64,13 +64,20 @@ body {
   font-size: 1rem;
 }
 
+#user-input .col {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
 #result {
-  max-width: 50rem;
+  max-width: 30rem;
   margin: 2rem auto;
   padding: 1rem;
   table-layout: fixed;
   border-spacing: 1rem;
   text-align: right;
+  display: grid;
 }
 
 #result thead {
