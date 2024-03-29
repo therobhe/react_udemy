@@ -1,4 +1,14 @@
 import { useState } from 'react';
+import { styled } from "styled-components";
+
+const StyledLabel = styled.label`
+    color: red !important;
+    font-size: 20px !important;
+  
+  @media (min-width: 1200px) {
+    font-size: 42px !important;
+  }
+`
 
 export default function AuthInputs() {
   const [enteredEmail, setEnteredEmail] = useState('');
@@ -24,7 +34,7 @@ export default function AuthInputs() {
     <div id="auth-inputs">
       <div className="controls">
         <p>
-          <label>Email</label>
+          <StyledLabel>Email</StyledLabel>
           <input
             type="email"
             className={emailNotValid ? 'invalid' : undefined}
@@ -32,7 +42,7 @@ export default function AuthInputs() {
           />
         </p>
         <p>
-          <label>Password</label>
+          <StyledLabel>Password</StyledLabel>
           <input
             type="password"
             className={passwordNotValid ? 'invalid' : undefined}
