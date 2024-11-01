@@ -1,11 +1,18 @@
 /* forwarding a ref to sub-components does not work like with state by default
 *   therefore, we need to forward it manually
 * */
-import {forwardRef} from "react";
+import {forwardRef, useRef, useImperativeHandle} from "react";
 
 const ResultModal = forwardRef(function ResultModal({ result, targetTime }, ref) {
+        // detatches the TimerChallenge from the modal by presenting an component API
+        const refDialog = useRef();
+        useImperativeHandle(ref, () => ({
+            open: () => refDialog.current.showModal(),
+            close: () => refDialog.current.close()
+        }));
+
         return (
-            <dialog ref={ref} className="result-modal">
+            <dialog ref={refDialog} className="result-modal">
                 <h2>You {result}!</h2>
                 <p>
                     The target time was {targetTime} seconds.

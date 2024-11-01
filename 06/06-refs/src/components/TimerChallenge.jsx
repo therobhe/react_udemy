@@ -15,7 +15,7 @@ export default function TimerChallenge ({ title, targetTime }) {
             setTimerRunning(false);
 
             // show the lose modal after time is up
-            refDialog.current.showModal();
+            refDialog.current.open();
         }, targetTime * 1000);
 
         setTimerRunning(true);
