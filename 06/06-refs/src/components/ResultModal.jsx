@@ -2,6 +2,7 @@
  * therefore, we need to forward it manually
  * */
 import { forwardRef, useRef, useImperativeHandle } from "react";
+import { createPortal } from "react-dom";
 
 /**
  * ResultModal component.
@@ -38,7 +39,8 @@ const ResultModal = forwardRef(function ResultModal(
     close: () => refDialog.current.close(),
   }));
 
-  return (
+  // create portal allows us to teleport the code from nested levels to a more top-level one
+  return createPortal(
     <dialog ref={refDialog} className="result-modal" onClose={onReset}>
       {userLost && <h2>You lost!</h2>}
       {!userLost && <h2>Your score is {score}!</h2>}
@@ -50,7 +52,8 @@ const ResultModal = forwardRef(function ResultModal(
       <form method="dialog" onSubmit={onReset}>
         <button>Close</button>
       </form>
-    </dialog>
+    </dialog>,
+    document.getElementById("modal-root"),
   );
 });
 
