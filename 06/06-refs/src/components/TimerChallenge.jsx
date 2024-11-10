@@ -22,9 +22,13 @@ export default function TimerChallenge({ title, targetTime }) {
   // check if time is up and reset the timer, show losing modal
   if (timeRemaining <= 0) {
     clearInterval(refTimer.current);
-    setTimeRemaining(targetTime * 1000);
     refDialog.current.open();
   }
+
+  // callback function that is triggered inside the result modal
+  const handleReset = () => {
+    setTimeRemaining(targetTime * 1000);
+  };
 
   // new approach in order to track remaining time with setInterval
   const handleStart = () => {
@@ -63,7 +67,12 @@ export default function TimerChallenge({ title, targetTime }) {
   return (
     <>
       {/* since the modal is always hidden, and trigged by showModal(), we can embedd it unconditioned */}
-      <ResultModal ref={refDialog} result="lost" targetTime={targetTime} />
+      <ResultModal
+        ref={refDialog}
+        targetTime={targetTime}
+        remainingTime={timeRemaining}
+        onReset={handleReset}
+      />
 
       <section className="challenge">
         <h2>{title}</h2>
