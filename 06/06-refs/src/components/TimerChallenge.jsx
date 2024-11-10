@@ -11,26 +11,28 @@ import ResultModal from "./ResultModal.jsx";
  * @return {JSX.Element} The JSX code for rendering the TimerChallenge component.
  */
 export default function TimerChallenge({ title, targetTime }) {
-  // here, the ref is used to store the pointer on the timer so it can be referenced in the handleStor function
+  /**
+   * STATE & REFS
+   */
+  // here, the ref is used to store the pointer on the timer so it can be referenced in the handleStart function
   const refTimer = useRef();
+  // ref on the result modal
   const refDialog = useRef();
-
+  // state that manages time
   const [timeRemaining, setTimeRemaining] = useState(targetTime * 1000);
-
+  // flag used to indicate game state
   const timerActive = timeRemaining > 0 && timeRemaining < targetTime * 1000;
 
   // check if time is up and reset the timer, show losing modal
   if (timeRemaining <= 0) {
-    clearInterval(refTimer.current);
     refDialog.current.open();
+    clearInterval(refTimer.current);
   }
 
-  // callback function that is triggered inside the result modal
-  const handleReset = () => {
-    setTimeRemaining(targetTime * 1000);
-  };
-
-  // new approach in order to track remaining time with setInterval
+  /**
+   * CALLBACK FUNCTIONS
+   */
+  // handleStart = run the timer for the instance by substracting a fixed time(ms) from it
   const handleStart = () => {
     refTimer.current = setInterval(() => {
       setTimeRemaining((prevTimeRemaining) => prevTimeRemaining - 10);
@@ -43,26 +45,10 @@ export default function TimerChallenge({ title, targetTime }) {
     clearInterval(refTimer.current);
   };
 
-  /**
-   * Old way does not prepare for winning condition
-   *
-   *     const handleStart = () => {
-   *         refTimer.current = setTimeout(() => {
-   *             setTimerDone(true);
-   *             setTimerRunning(false);
-   *
-   *             // show the lose modal after time is up
-   *             refDialog.current.open();
-   *         }, targetTime * 1000);
-   *
-   *         setTimerRunning(true);
-   *     }
-   *
-   *     const handleStop = () => {
-   *         clearTimeout(refTimer.current);
-   *         setTimerRunning(false);
-   *     }
-   */
+  // Reset the timer after finish modal is shown
+  const handleReset = () => {
+    setTimeRemaining(targetTime * 1000);
+  };
 
   return (
     <>

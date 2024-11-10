@@ -37,8 +37,7 @@ const ResultModal = forwardRef(function ResultModal(
 
   return (
     <dialog ref={refDialog} className="result-modal">
-      {userLost && <h2>You lost!</h2>}
-      {!userLost && <h2>You won!</h2>}
+      {userLost ? <h2>You lost!</h2> : <h2>You won!</h2>}
       <p>The target time was {targetTime} seconds.</p>
       <p>
         You stopped the timer with <strong>{formattedTimeRemaining}</strong>{" "}
