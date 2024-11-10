@@ -1,4 +1,4 @@
-/* forwarding a ref to sub-components does not work like with state by default
+/* forwarding a ref to subcomponents does not work like with state by default
  * therefore, we need to forward it manually
  * */
 import { forwardRef, useRef, useImperativeHandle } from "react";
@@ -23,7 +23,7 @@ const ResultModal = forwardRef(function ResultModal(
   ref,
 ) {
   /*
-   * detatches the TimerChallenge from the modal by presenting an component API
+   * detaches the TimerChallenge from the modal by presenting a component API
    * useImperativeHandle() will most likely always be used in combination with forwardRef()
    */
   const refDialog = useRef();
