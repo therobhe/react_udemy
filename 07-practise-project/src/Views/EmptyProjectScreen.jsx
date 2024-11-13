@@ -1,13 +1,7 @@
 import noProjectImage from "../assets/no-projects.png";
 
-/**
- * Renders the ProjectDetails component
- *
- * @return {JSX.Element} A JSX element that includes a placeholder
- * message and a button for creating a new project.
- */
-export default function ProjectDetails() {
-  const emptyProjectContent = (
+export default function EmptyProjectScreen({ handleCreate }) {
+  return (
     <div className="w-[50rem] mt-16 flex flex-col items-center">
       <img
         className="w-16 h-16 object-contain mx-auto"
@@ -20,13 +14,12 @@ export default function ProjectDetails() {
       <p className="text-stone-600 mb-4">
         Select a project or get started with a new one
       </p>
-      <button className="px-6 py-2 rounded-md bg-stone-800 text-stone-50 hover:bg-stone-950">
+      <button
+        className="px-6 py-2 rounded-md bg-stone-800 text-stone-50 hover:bg-stone-950"
+        onClick={handleCreate}
+      >
         Create new project
       </button>
     </div>
-  );
-
-  return (
-    <main className="h-screen my-8 flex gap-8">{emptyProjectContent}</main>
   );
 }
