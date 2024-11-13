@@ -1,5 +1,5 @@
 import ProjectSidebar from "./components/ProjectSidebar.jsx";
-import ProjectSelectionScreen from "./Views/ProjectSelectionScreen.jsx";
+import ProjectSelectionScreen from "./views/ProjectSelectionScreen.jsx";
 import ProjectHeader from "./components/ProjectHeader.jsx";
 
 import { useState } from "react";
