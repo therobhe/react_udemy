@@ -1,14 +1,14 @@
-import EmptyProjectScreen from "../Views/EmptyProjectScreen.jsx";
-import CreateProjectScreen from "../Views/CreateProjectScreen.jsx";
-import EditProjectScreen from "../Views/EditProjectScreen.jsx";
+import EmptyProjectScreen from "./EmptyProjectScreen.jsx";
+import CreateProjectScreen from "./CreateProjectScreen.jsx";
+import EditProjectScreen from "./EditProjectScreen.jsx";
 
 /**
- * Renders the ProjectEditArea component
+ * Renders the ProjectSelectionScreen component
  *
  * @return {JSX.Element} A JSX element that includes a placeholder
  * message and a button for creating a new project.
  */
-export default function ProjectEditArea({
+export default function ProjectSelectionScreen({
   handleCreate,
   createProject,
   editProject,

@@ -1,5 +1,5 @@
 import ProjectSidebar from "./components/ProjectSidebar.jsx";
-import ProjectEditArea from "./components/ProjectEditArea.jsx";
+import ProjectSelectionScreen from "./Views/ProjectSelectionScreen.jsx";
 import ProjectHeader from "./components/ProjectHeader.jsx";
 
 import { useState } from "react";
@@ -8,7 +8,6 @@ function App() {
   const [editProject, setEditProject] = useState(false);
   const [createProject, setCreateProject] = useState(false);
 
-  // callback to setEditing from inside the components
   const handleEdit = () => {
     setEditProject(true);
     setCreateProject(false);
@@ -24,7 +23,7 @@ function App() {
       <ProjectHeader />
       <div className="flex">
         <ProjectSidebar handleEdit={handleEdit} handleCreate={handleCreate} />
-        <ProjectEditArea
+        <ProjectSelectionScreen
           handleCreate={handleCreate}
           createProject={createProject}
           editProject={editProject}
