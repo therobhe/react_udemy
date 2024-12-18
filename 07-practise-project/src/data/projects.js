@@ -1,4 +1,4 @@
-export const projects = [
+export let projects = [
   {
     id: 1,
     title: "Learning Refs",
