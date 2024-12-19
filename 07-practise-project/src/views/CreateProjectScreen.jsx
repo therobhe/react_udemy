@@ -31,8 +31,7 @@ export default function CreateProjectScreen({handleDefault}) {
 
     // Todo: create portal for dialog in own component
 
-    return (
-        <div className="w-[50rem] mt-16 flex flex-col items-center">
+    return (<div className="w-[50rem] mt-16 flex flex-col items-center">
             <form className="mt-4" onSubmit={handleSubmit}>
                 <div className="create-action-buttons flex justify-end gap-4">
                     <button onClick={handleDefault}>Cancel</button>
@@ -57,6 +56,5 @@ export default function CreateProjectScreen({handleDefault}) {
                     </button>
                 </form>
             </dialog>
-        </div>
-    );
+        </div>);
 }
