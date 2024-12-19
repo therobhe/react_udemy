@@ -7,20 +7,25 @@ import { useState } from "react";
 function App() {
   const [editProject, setEditProject] = useState(false);
   const [createProject, setCreateProject] = useState(false);
+  const [selectedProjectId, setSelectedProjectId] = useState(null);
 
-  const handleEdit = () => {
+  const handleEdit = (id) => {
     setEditProject(true);
     setCreateProject(false);
+    console.log("selected project id", id);
+    setSelectedProjectId(id);
   };
 
   const handleCreate = () => {
     setCreateProject(true);
     setEditProject(false);
+    setSelectedProjectId(null);
   };
 
   const handleDefault = () => {
     setEditProject(false);
     setCreateProject(false);
+    setSelectedProjectId(null);
   }
 
   return (
@@ -33,6 +38,7 @@ function App() {
           createProject={createProject}
           editProject={editProject}
           handleDefault={handleDefault}
+          selectedProjectId={selectedProjectId}
         />
       </div>
     </>

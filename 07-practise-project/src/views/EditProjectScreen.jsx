@@ -1,7 +1,11 @@
-export default function EditProjectScreen() {
-  return (
-    <div>
-      <h1>Edit Project Screen</h1>
-    </div>
-  );
+import {projects} from "../data/projects.js";
+
+export default function EditProjectScreen({selectedProjectId}) {
+    // fetch project
+
+    return (
+        <div>
+            <h1>Edit Project Screen: {selectedProjectId}</h1>
+        </div>
+    );
 }

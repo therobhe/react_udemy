@@ -12,12 +12,14 @@ export default function ProjectSelectionScreen({
                                                    handleCreate,
                                                    createProject,
                                                    editProject,
-                                                   handleDefault
+                                                   handleDefault,
+                                                   selectedProjectId
                                                }) {
+
     const activeScreen = createProject ? (
         <CreateProjectScreen handleDefault={handleDefault}/>
     ) : editProject ? (
-        <EditProjectScreen/>
+        <EditProjectScreen selectedProjectId={selectedProjectId}/>
     ) : (
         <EmptyProjectScreen handleCreate={handleCreate}/>
     );
