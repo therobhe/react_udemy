@@ -12,7 +12,6 @@ function App() {
   const handleEdit = (id) => {
     setEditProject(true);
     setCreateProject(false);
-    console.log("selected project id", id);
     setSelectedProjectId(id);
   };
 
