@@ -15,7 +15,7 @@ export default function CreateProjectScreen({handleDefault}) {
             id: newId,
             title: titleRef.current.value,
             description: descriptionRef.current.value,
-            dueData: dateRef.current.value,
+            dueDate: dateRef.current.value,
             tasks: []
         };
         projects.push(newProject);
