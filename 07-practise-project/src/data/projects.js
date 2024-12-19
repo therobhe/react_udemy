@@ -2,15 +2,15 @@ export let projects = [
   {
     id: 1,
     title: "Learning Refs",
-    description: "This is a project description",
-    dueDate: "2021-04-01",
+    description: "Use refs instead of state for value updates that do not require UI re-rendering",
+    dueDate: "2024-04-01",
     tasks: ["learn react", "learn redux"],
   },
   {
     id: 2,
-    title: "Learning Flutter",
-    description: "This is a project description",
-    dueDate: "2021-04-01",
-    tasks: ["learn flutter", "learn dart"],
+    title: "Hablos Espanol?",
+    description: "How far have you come on Duolingo?",
+    dueDate: "2026-12-31",
+    tasks: ["Como estas?", "Tengo una coche?"],
   },
 ];
