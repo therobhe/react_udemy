@@ -24,23 +24,18 @@ export default function CreateProjectScreen({handleDefault}) {
         modalRef.current.showModal();
     };
 
-    const handleAbort = (e) => {
-        e.preventDefault();
-        console.log('Abort');
-    }
-
     const handleReset = () => {
         modalRef.current.close();
         handleDefault();
     }
 
-    // Todo: create portal for dialog
+    // Todo: create portal for dialog in own component
 
     return (
         <div className="w-[50rem] mt-16 flex flex-col items-center">
             <form className="mt-4" onSubmit={handleSubmit}>
                 <div className="create-action-buttons flex justify-end gap-4">
-                    <button onClick={handleAbort}>Cancel</button>
+                    <button onClick={handleDefault}>Cancel</button>
                     <button type="submit"
                             className="px-4 py-2 text-xs md:text-base rounded-md bg-stone-700 text-stone-400 hover:bg-stone-600 hover:text-stone-100">Save
                     </button>
@@ -52,9 +47,10 @@ export default function CreateProjectScreen({handleDefault}) {
                 </div>
             </form>
 
-            <dialog id="create-project-modal" className="backdrop:bg-stone-900/90 p-4 rounded-md shadow-md"
+            <dialog id="create-project-modal"
+                    className="backdrop:bg-stone-900/90 p-4 rounded-md shadow-md text-center"
                     ref={modalRef}>
-                <p>New project successfully created!</p>
+                <p className="mb-4">New project successfully created!</p>
                 <form method="dialog">
                     <button onClick={handleReset}
                             className="px-6 py-2 rounded-md bg-stone-800 text-stone-50 hover:bg-stone-950">Dismiss
