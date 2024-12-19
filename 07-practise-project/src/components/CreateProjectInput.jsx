@@ -5,7 +5,7 @@ const CreateProjectInput = React.forwardRef(({type}, ref) => {
         const displayType = type.toUpperCase();
 
         return (
-            <div className={`create-${type}-box`}>
+            <div className={`create-${type}-box my-4`}>
                 <label className="text-sm font-bold uppercase text-stone-500"
                        htmlFor="create-${type}-input">{displayType}</label>
                 <input

@@ -18,6 +18,11 @@ function App() {
     setEditProject(false);
   };
 
+  const handleDefault = () => {
+    setEditProject(false);
+    setCreateProject(false);
+  }
+
   return (
     <>
       <ProjectHeader />
@@ -27,6 +32,7 @@ function App() {
           handleCreate={handleCreate}
           createProject={createProject}
           editProject={editProject}
+          handleDefault={handleDefault}
         />
       </div>
     </>

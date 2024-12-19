@@ -9,17 +9,18 @@ import EditProjectScreen from "./EditProjectScreen.jsx";
  * message and a button for creating a new project.
  */
 export default function ProjectSelectionScreen({
-  handleCreate,
-  createProject,
-  editProject,
-}) {
-  const activeScreen = createProject ? (
-    <CreateProjectScreen />
-  ) : editProject ? (
-    <EditProjectScreen />
-  ) : (
-    <EmptyProjectScreen handleCreate={handleCreate} />
-  );
+                                                   handleCreate,
+                                                   createProject,
+                                                   editProject,
+                                                   handleDefault
+                                               }) {
+    const activeScreen = createProject ? (
+        <CreateProjectScreen handleDefault={handleDefault}/>
+    ) : editProject ? (
+        <EditProjectScreen/>
+    ) : (
+        <EmptyProjectScreen handleCreate={handleCreate}/>
+    );
 
-  return <main className="h-screen my-8 flex gap-8">{activeScreen}</main>;
+    return <main className="h-screen my-8 flex gap-8">{activeScreen}</main>;
 }
