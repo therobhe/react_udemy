@@ -29,7 +29,8 @@ export default function EditProjectScreen({ selectedProjectId, handleDefault }) 
     const handleDelete = (e) => {
         e.preventDefault();
         const updatedArray = projects.filter((project) => project.id !== selectedProjectId);
-        console.log(updatedArray)
+        projects.length = 0; // Clear the original array
+        projects.push(...updatedArray); // Push the updated array elements
         handleDefault();
     }
 
