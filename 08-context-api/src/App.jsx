@@ -67,9 +67,19 @@ function App() {
     });
   }
 
+  /*
+   this links the dynamic updating state to the context:
+  - items is for the reading the state-items in the cart component through the context
+  - addItemToCart is for the writing in the product component through the contextt
+  */
+  const cartCtx = {
+    items: shoppingCart.items,
+    addItemToCart: handleAddItemToCart
+  };
+
   return (
     /* value ist essential with the default value before consuming the context */
-    <CartContext.Provider value={{items: []}}>
+    <CartContext.Provider value={cartCtx}>
       <Header
         cart={shoppingCart}
         onUpdateCartItemQuantity={handleUpdateCartItemQuantity}
@@ -78,7 +88,7 @@ function App() {
       <Shop>
         {DUMMY_PRODUCTS.map((product) => (
             <li key={product.id}>
-              <Product {...product} onAddToCart={handleAddItemToCart} />
+              <Product {...product} />
             </li>
         ))}
       </Shop>
