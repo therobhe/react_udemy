@@ -72,6 +72,7 @@ function App() {
         cart={shoppingCart}
         onUpdateCartItemQuantity={handleUpdateCartItemQuantity}
       />
+      {/*prevents passing the handleItem function as a prop since it stays here inside the app component*/}
       <Shop>
         {DUMMY_PRODUCTS.map((product) => (
             <li key={product.id}>
