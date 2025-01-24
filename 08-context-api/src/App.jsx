@@ -68,7 +68,8 @@ function App() {
   }
 
   return (
-    <CartContext.Provider>
+    /* value ist essential with the default value before consuming the context */
+    <CartContext.Provider value={{items: []}}>
       <Header
         cart={shoppingCart}
         onUpdateCartItemQuantity={handleUpdateCartItemQuantity}
