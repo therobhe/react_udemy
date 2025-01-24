@@ -75,7 +75,7 @@ function App() {
       <Shop>
         {DUMMY_PRODUCTS.map((product) => (
             <li key={product.id}>
-              <Product {...product} onAddToCart={onAddItemToCart} />
+              <Product {...product} onAddToCart={handleAddItemToCart} />
             </li>
         ))}
       </Shop>
