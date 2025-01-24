@@ -74,16 +74,15 @@ function App() {
   */
   const cartCtx = {
     items: shoppingCart.items,
-    addItemToCart: handleAddItemToCart
+    addItemToCart: handleAddItemToCart,
+    updateCartQuantity: handleUpdateCartItemQuantity
   };
 
   return (
     /* value ist essential with the default value before consuming the context */
     <CartContext.Provider value={cartCtx}>
-      <Header
-        cart={shoppingCart}
-        onUpdateCartItemQuantity={handleUpdateCartItemQuantity}
-      />
+      <Header />
+
       {/*prevents passing the handleItem function as a prop since it stays here inside the app component*/}
       <Shop>
         {DUMMY_PRODUCTS.map((product) => (
