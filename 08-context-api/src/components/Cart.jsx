@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { CartContext } from "../store/cart-context";
 
-export default function Cart({ onUpdateItemQuantity }) {
+export default function Cart() {
   /* setting up the consumer - call the global context & destructure its value */
   const { items, updateCartQuantity } = useContext(CartContext);
 
