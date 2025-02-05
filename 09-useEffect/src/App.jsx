@@ -7,11 +7,17 @@ import DeleteConfirmation from "./components/DeleteConfirmation.jsx";
 import logoImg from "./assets/logo.png";
 import { sortPlacesByDistance } from "./loc.js";
 
+// this is possible because in contrast to the navigator callback, this is a synchronous function that is executed instantly
+const storedIDs = JSON.parse(localStorage.getItem("selectedPlaces")) || [];
+const storedPlaces = storedIDs.map((id) =>
+  AVAILABLE_PLACES.find((place) => place.id === id)
+);
+
 function App() {
   const modal = useRef();
   const selectedPlace = useRef([]);
   const [availablePlaces, setAvailablePlaces] = useState([]);
-  const [pickedPlaces, setPickedPlaces] = useState([]);
+  const [pickedPlaces, setPickedPlaces] = useState(storedPlaces);
 
   // a side effect is something that is not directly related to the rendering of the (App) component (it is not setting up a click listener, or changing the state of the component)
   // useEffect is a hook that allows you to perform side effects in function components without triggering a re-render (here it prevents an infinite loop)
@@ -43,7 +49,10 @@ function App() {
 
     const storedIDs = JSON.parse(localStorage.getItem("selectedPlaces")) || [];
     if (storedIDs.indexOf(id) === -1) {
-      localStorage.setItem("selectedPlaces", JSON.stringify(id, ...storedIDs));
+      localStorage.setItem(
+        "selectedPlaces",
+        JSON.stringify([id, ...storedIDs])
+      );
     }
   }
 
@@ -52,6 +61,12 @@ function App() {
       prevPickedPlaces.filter((place) => place.id !== selectedPlace.current)
     );
     modal.current.close();
+
+    const storedIDs = JSON.parse(localStorage.getItem("selectedPlaces")) || [];
+    localStorage.setItem(
+      'selectedPlaces',
+      JSON.stringify(storedIDs.filter((id) => id !== selectedPlace.current))
+    );
   }
 
   return (
