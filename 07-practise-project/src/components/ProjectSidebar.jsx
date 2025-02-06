@@ -17,7 +17,7 @@ export default function ProjectSidebar({ handleEdit, handleCreate }) {
   }, []);
 
   return (
-    <aside className="p-6 bg-stone-900 text-stone-50 rounded-r-xl">
+    <aside className="p-6 bg-stone-900 text-stone-50 rounded-r-xl w-1/3">
       <h2 className="mb-8 font-bold uppercase md:text-xl text-stone-200">
         Your Projects
       </h2>

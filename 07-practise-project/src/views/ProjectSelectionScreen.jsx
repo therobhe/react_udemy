@@ -24,5 +24,5 @@ export default function ProjectSelectionScreen({
     <EmptyProjectScreen handleCreate={handleCreate} />
   );
 
-  return <main className="h-screen my-8 flex gap-8">{activeScreen}</main>;
+  return <main className="h-screen my-8 flex w-2/3">{activeScreen}</main>;
 }
