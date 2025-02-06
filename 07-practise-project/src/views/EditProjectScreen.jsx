@@ -51,11 +51,11 @@ export default function EditProjectScreen({ selectedProjectId, handleDefault }) 
       {selectedProjectId && (
         <>
           <div className="project-details">
-            <div className="flex justify-between mb-4">
+            <div className="flex flex-col sm:flex-row justify-between mb-4">
               <h1 className="text-3xl font-bold text-stone-600 mb-2">
                 {projects.find((project) => project.id === selectedProjectId).title}
               </h1>
-              <button onClick={handleDelete} className="px-6 py-2 rounded-md bg-stone-800 text-stone-50 hover:bg-stone-950">
+              <button onClick={handleDelete} className="px-6 py-2 sm:ms-4 rounded-md bg-stone-800 text-stone-50 hover:bg-stone-950">
                 Delete
               </button>
             </div>
@@ -71,9 +71,9 @@ export default function EditProjectScreen({ selectedProjectId, handleDefault }) 
 
           <div className="tasks my-4">
             <h2 className="text-2xl font-bold text-stone-600 mb-4">Tasks</h2>
-            <form onSubmit={handleAddTask} className="flex flex-col mb-4">
-              <input ref={refNewTask} className="rounded-sm bg-stone-200 mb-4 h-10 lg:mb-0 lg:me-2" />
-              <button type="submit" className="px-6 py-2 rounded-md bg-stone-800 text-stone-50 hover:bg-stone-950">
+            <form onSubmit={handleAddTask} className="flex flex-col sm:flex-row mb-4">
+              <input ref={refNewTask} className="rounded-sm bg-stone-200 mb-2 h-10 sm:mb-0 lg:me-2" />
+              <button type="submit" className="px-6 py-2 rounded-md bg-stone-800 text-stone-50 hover:bg-stone-950 sm:ms-2">
                 Add task
               </button>
             </form>

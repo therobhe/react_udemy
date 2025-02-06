@@ -15,7 +15,6 @@ export default function ProjectSelectionScreen({
                                                  handleDefault,
                                                  selectedProjectId
                                                }) {
-
   const activeScreen = createProject ? (
     <CreateProjectScreen handleDefault={handleDefault} />
   ) : editProject ? (
@@ -24,5 +23,9 @@ export default function ProjectSelectionScreen({
     <EmptyProjectScreen handleCreate={handleCreate} />
   );
 
-  return <main className="h-screen my-8 flex w-2/3">{activeScreen}</main>;
+  return (
+    <main className="h-screen flex flex-col w-2/3 mx-auto mt-4">
+      {activeScreen}
+    </main>
+  );
 }
