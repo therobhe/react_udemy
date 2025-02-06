@@ -13,7 +13,7 @@ import noProjectImage from "../assets/no-projects.png";
  */
 export default function EmptyProjectScreen({ handleCreate }) {
   return (
-    <div className="w-[50rem] mt-16 flex flex-col items-center">
+    <div className="flex flex-col lg:items-center px-6">
       <img
         className="w-16 h-16 object-contain mx-auto"
         src={noProjectImage}
