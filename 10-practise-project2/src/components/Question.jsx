@@ -1,11 +1,11 @@
-export default function Question({questionData, index}) {
+export default function Question({questionData, index, onAnswerSubmit}) {
   return (
     <div key={index} className="question-container">
       <h2>{questionData.text}</h2>
-      <ul>
+      <ul id="answers">
         {questionData.answers.map((answer, answerIndex) => (
-          <li key={answerIndex}>
-            <button>{answer}</button>
+          <li key={answerIndex} className="answer">
+            <button onClick={onAnswerSubmit}>{answer}</button>
           </li>
         ))}
       </ul>

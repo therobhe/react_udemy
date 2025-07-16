@@ -1,6 +1,7 @@
 import { quizCatalogue } from "../data/questions.js";
 import ProgressBar from "./ProgressBar.jsx";
 import Question from "./Question.jsx";
+import { useState } from "react";
 
 const TIME = 10000; // 10 seconds
 
@@ -12,12 +13,26 @@ const questions = quizCatalogue;
  * @constructor
  */
 export default function QuestionScreen() {
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+
+  const handleAnswerSubmit = () => {
+    if (currentQuestionIndex < questions.length - 1) {
+      setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
+      console.log("Display question: ", currentQuestionIndex);
+    } else {
+      console.log("Quiz completed!");
+    }
+  };
+
   return (
     <div id="question">
-      <ProgressBar time={TIME}/>
-      {questions.map((question, index) => (
-        <Question key={index} questionData={question} />
-      ))}
+      <ProgressBar key={currentQuestionIndex}
+                   time={TIME}
+      />
+      <Question key={`q-${currentQuestionIndex}`}
+                questionData={questions[currentQuestionIndex]}
+                onAnswerSubmit={handleAnswerSubmit}
+      />
     </div>
   );
 }

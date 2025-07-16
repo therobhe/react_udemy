@@ -22,9 +22,6 @@ export default function ProgressBar({ time }) {
   return (
     <div className="progress">
       <progress value={remainingTime} max={time} />
-      <span>
-        {Math.floor(remainingTime / 1000)}s remaining
-      </span>
     </div>
   );
 }
