@@ -8,3 +8,6 @@
 /dataSources.local.xml
 /git_toolbox_blame.xml
 /prettier.xml
+/codeStyles/codeStyleConfig.xml
+/codeStyles/Project.xml
+/git_toolbox_prj.xml
