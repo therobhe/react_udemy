@@ -1,11 +1,11 @@
 import Header from "./areas/Header.jsx";
-import Main from "./areas/Main.jsx";
+import Quiz from "./areas/Quiz.jsx";
 
 function App() {
   return (
     <>
       <Header />
-      <Main />
+      <Quiz />
     </>
   )
 }

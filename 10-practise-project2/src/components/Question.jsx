@@ -1,14 +1,62 @@
-export default function Question({questionData, index, onAnswerSubmit}) {
+import QuestionTimer from "./QuestionTimer.jsx";
+import Answers from "./Answers.jsx";
+import { useState } from "react";
+import { QUESTIONS } from "../data/questions.js";
+
+export default function Question({ index, onSelectAnswer, handleSkipAnswer }) {
+  const [answer, setAnswer] = useState({
+    selectedAnswer: "",
+    isCorrect: null
+  });
+
+  let timer = 10000;
+
+  if (answer.selectedAnswer) {
+    timer = 1000;
+  }
+  if (answer.isCorrect !== null) {
+    timer = 2000;
+  }
+
+  function handleSelectAnswer(answer) {
+    setAnswer({
+      selectedAnswer: answer,
+      isCorrect: null
+    });
+
+    setTimeout(() => {
+      setAnswer({
+        selectedAnswer: answer,
+        isCorrect: answer === QUESTIONS[index].answers[0] // Assuming the first answer is always correct for this example
+      });
+
+      setTimeout(() => {
+        onSelectAnswer(answer);
+      }, 2000);
+    }, 1000);
+  }
+
+  let answerState = "";
+
+  if (answer.selectedAnswer && answer.isCorrect !== null) {
+    answerState = answer.isCorrect ? "correct" : "wrong";
+  } else if (answer.selectedAnswer) {
+    answerState = "answered";
+  }
+
   return (
-    <div key={index} className="question-container">
-      <h2>{questionData.text}</h2>
-      <ul id="answers">
-        {questionData.answers.map((answer, answerIndex) => (
-          <li key={answerIndex} className="answer">
-            <button onClick={() => {onAnswerSubmit(answer)}}>{answer}</button>
-          </li>
-        ))}
-      </ul>
+    <div id="question">
+      <QuestionTimer time={timer}
+                     key={timer}
+                     onTimeUp={answer.selectedAnswer === "" ? handleSkipAnswer : null}
+                     mode={answerState}
+      />
+      <h2>{QUESTIONS[index].text}</h2>
+      <Answers answerState={answerState}
+               selectedAnswer={answer.selectedAnswer}
+               answers={QUESTIONS[index].answers}
+               onSelect={handleSelectAnswer}
+      />
     </div>
-  )
+  );
 }

@@ -1,3 +1,4 @@
+/*
 import { useState } from "react";
 import { quizCatalogue } from "../data/questions.js";
 
@@ -42,4 +43,4 @@ export function useQuizNavigation({onFinish, setResult, setGivenAnswer}) {
     handleAnswer,
     currentQuestion: questions[currentQuestionIndex]
   }
-}
+}*/

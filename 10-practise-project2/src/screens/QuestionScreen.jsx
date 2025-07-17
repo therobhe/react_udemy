@@ -1,14 +1,15 @@
-import ProgressBar from "../components/ProgressBar.jsx";
+/*
+import QuestionTimer from "../components/QuestionTimer.jsx";
 import Question from "../components/Question.jsx";
 import { useQuizNavigation } from "../hooks/useQuizNavigation.jsx";
 
 const TIME = 10000; // 10 seconds
 
-/**
+/!**
  * QuizGame component - shell for the quiz rendering the remaining time, questions and answers
  * @returns {JSX.Element}
  * @constructor
- */
+ *!/
 export default function QuestionScreen({ onFinish, setResult, setGivenAnswer }) {
   const {currentQuestionIndex, handleAnswer, currentQuestion} = useQuizNavigation({
     onFinish,
@@ -18,7 +19,7 @@ export default function QuestionScreen({ onFinish, setResult, setGivenAnswer }) 
 
   return (
     <div id="question">
-      <ProgressBar key={currentQuestionIndex}
+      <QuestionTimer key={currentQuestionIndex}
                    time={TIME}
       />
       <Question key={`q-${currentQuestionIndex}`}
@@ -27,4 +28,4 @@ export default function QuestionScreen({ onFinish, setResult, setGivenAnswer }) 
       />
     </div>
   );
-}
+}*/
