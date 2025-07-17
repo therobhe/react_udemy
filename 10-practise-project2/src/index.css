@@ -150,7 +150,8 @@ header h1 {
   margin: 0 auto;
 }
 
-.answer button {
+.answer button,
+.restart-quiz {
   display: inline-block;
   width: 100%;
   font-family: 'Roboto Condensed', sans-serif;
@@ -165,6 +166,8 @@ header h1 {
 }
 
 .answer button:hover,
+.restart-quiz:hover,
+.restart-quiz:focus,
 .answer button:focus {
   /* background: linear-gradient(180deg, #bf48f6 0%, #9b50f2 100%); */
   background: #9d5af5;
@@ -172,7 +175,8 @@ header h1 {
   /* box-shadow: 0 0 4px 2px rgba(255, 200, 60, 0.8); */
 }
 
-.answer button.selected {
+.answer button.selected,
+.restart-quiz.selected {
   /* background: linear-gradient(180deg, #fbda81 0%, #f8b173 100%); */
   background: #f5a76c;
   color: #2c203d;

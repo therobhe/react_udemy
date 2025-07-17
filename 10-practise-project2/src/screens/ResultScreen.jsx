@@ -1,9 +1,14 @@
-export default function ResultScreen() {
+import ResultHeader from "../components/ResultHeader.jsx";
+import ResultSummary from "../components/ResultSummary.jsx";
+import ResultReview from "../components/ResultReview.jsx";
+
+export default function ResultScreen({ result, givenAnswers }) {
   return (
     <div id="summary">
-      <h2>Quiz Completed!</h2>
-      <p>Your score: 85%</p>
-      <button onClick={() => window.location.reload()}>Restart Quiz</button>
+      <ResultHeader />
+      <ResultSummary result={result} />
+      <ResultReview givenAnswers={givenAnswers}/>
+      <button className="restart-quiz" onClick={() => window.location.reload()}>Restart Quiz</button>
     </div>
-  )
+  );
 }

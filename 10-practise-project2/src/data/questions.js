@@ -8,6 +8,7 @@ export const quizCatalogue = [
       'A framework to build user interfaces with help of imperative code.',
       'A library used for building mobile applications only.',
     ],
+    correctAnswerIndex: 0
   },
   {
     id: 'q2',
@@ -18,6 +19,7 @@ export const quizCatalogue = [
       'Handling errors within the application.',
       'Part of the Redux library for managing global state.',
     ],
+    correctAnswerIndex: 0
   },
   {
     id: 'q3',
@@ -28,6 +30,7 @@ export const quizCatalogue = [
       'A specific HTML version that was explicitly created for React.',
       'A tool for making HTTP requests in a React application.',
     ],
+    correctAnswerIndex: 0
   },
   {
     id: 'q4',
@@ -38,6 +41,7 @@ export const quizCatalogue = [
       'By creating a file with a .jsx extension.',
       'By using the "new" keyword followed by the component name.',
     ],
+    correctAnswerIndex: 0
   },
   {
     id: 'q5',
@@ -48,6 +52,7 @@ export const quizCatalogue = [
       'The overall status of a React application, including all props and components.',
       'A library for managing global state in React applications.',
     ],
+    correctAnswerIndex: 0
   },
   {
     id: 'q6',
@@ -58,6 +63,7 @@ export const quizCatalogue = [
       'By using the forEach() method to iterate over an array of data and returning JSX.',
       'By using the loop() method to iterate over an array of data and returning JSX.',
     ],
+    correctAnswerIndex: 0
   },
   {
     id: 'q7',
@@ -68,5 +74,6 @@ export const quizCatalogue = [
       'Using the && operator.',
       'Using an if-else statement.',
     ],
+    correctAnswerIndex: 0
   },
 ];

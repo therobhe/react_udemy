@@ -5,7 +5,7 @@ export default function Question({questionData, index, onAnswerSubmit}) {
       <ul id="answers">
         {questionData.answers.map((answer, answerIndex) => (
           <li key={answerIndex} className="answer">
-            <button onClick={onAnswerSubmit}>{answer}</button>
+            <button onClick={() => {onAnswerSubmit(answer)}}>{answer}</button>
           </li>
         ))}
       </ul>

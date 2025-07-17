@@ -1,29 +1,20 @@
-import { quizCatalogue } from "../data/questions.js";
 import ProgressBar from "../components/ProgressBar.jsx";
 import Question from "../components/Question.jsx";
-import { useState } from "react";
+import { useQuizNavigation } from "../hooks/useQuizNavigation.jsx";
 
 const TIME = 10000; // 10 seconds
-
-const questions = quizCatalogue;
 
 /**
  * QuizGame component - shell for the quiz rendering the remaining time, questions and answers
  * @returns {JSX.Element}
  * @constructor
  */
-export default function QuestionScreen({onFinish}) {
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-
-  const handleAnswerSubmit = () => {
-    if (currentQuestionIndex < questions.length - 1) {
-      setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
-      console.log("Display question: ", currentQuestionIndex);
-    } else {
-      console.log("Quiz completed!");
-      onFinish();
-    }
-  };
+export default function QuestionScreen({ onFinish, setResult, setGivenAnswer }) {
+  const {currentQuestionIndex, handleAnswer, currentQuestion} = useQuizNavigation({
+    onFinish,
+    setResult,
+    setGivenAnswer
+  })
 
   return (
     <div id="question">
@@ -31,8 +22,8 @@ export default function QuestionScreen({onFinish}) {
                    time={TIME}
       />
       <Question key={`q-${currentQuestionIndex}`}
-                questionData={questions[currentQuestionIndex]}
-                onAnswerSubmit={handleAnswerSubmit}
+                questionData={currentQuestion}
+                onAnswerSubmit={handleAnswer}
       />
     </div>
   );
