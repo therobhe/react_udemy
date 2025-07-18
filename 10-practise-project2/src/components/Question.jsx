@@ -9,6 +9,7 @@ export default function Question({ index, onSelectAnswer, handleSkipAnswer }) {
     isCorrect: null
   });
 
+  // timer effects for visual styling
   let timer = 10000;
 
   if (answer.selectedAnswer) {
@@ -18,6 +19,7 @@ export default function Question({ index, onSelectAnswer, handleSkipAnswer }) {
     timer = 2000;
   }
 
+  // handle the answer setting with the delay for visual effects and send it to the parent component
   function handleSelectAnswer(answer) {
     setAnswer({
       selectedAnswer: answer,
@@ -27,7 +29,7 @@ export default function Question({ index, onSelectAnswer, handleSkipAnswer }) {
     setTimeout(() => {
       setAnswer({
         selectedAnswer: answer,
-        isCorrect: answer === QUESTIONS[index].answers[0] // Assuming the first answer is always correct for this example
+        isCorrect: answer === QUESTIONS[index].answers[0]
       });
 
       setTimeout(() => {
@@ -36,6 +38,7 @@ export default function Question({ index, onSelectAnswer, handleSkipAnswer }) {
     }, 1000);
   }
 
+  // answer state for visual styling
   let answerState = "";
 
   if (answer.selectedAnswer && answer.isCorrect !== null) {
