@@ -12,3 +12,7 @@ However, they can still work together!
 
 ## Difference to functional components
 - functional component are regular JS functions that return renderable results.
+- the lifecycle methods of class-based components are represented by hooks in functional components:
+  - `componentDidMount` is equivalent to `useEffect(() => {}, [])`
+  - `componentDidUpdate` is equivalent to `useEffect(() => {}, [dependencies])`
+  - `componentWillUnmount` is equivalent to the cleanup function in `useEffect(() => {}, [])`
