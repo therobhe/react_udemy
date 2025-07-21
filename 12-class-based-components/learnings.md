@@ -11,6 +11,7 @@ However, they can still work together!
 - lifecycle methods like `componentDidMount`, `componentDidUpdate`, and `componentWillUnmount` instead of hooks
 
 ## Difference to functional components
+- big benefit: class components can build error boundaries
 - functional component are regular JS functions that return renderable results.
 - the lifecycle methods of class-based components are represented by hooks in functional components:
   - `componentDidMount` is equivalent to `useEffect(() => {}, [])`
