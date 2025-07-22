@@ -10,3 +10,4 @@
 - resolve the promise with `response.json()` to get the data in JSON format
 - implementing `loadingState` and `errorState` is a good practice to handle the state of the request
 - wrapping the fetch call in a try-catch block helps to catch client and server side errors
+- when updating or deleting data, it is best practise to reset the state to the previous state inside the catch block
