@@ -5,3 +5,5 @@
 /12-class-based-components/node_modules
 /13-http-requests/node_modules
 /13-http-requests/backend/node_modules/
+/14-custom-hooks/backend/node_modules/
+/14-custom-hooks/node_modules/
