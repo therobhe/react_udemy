@@ -1,26 +1,48 @@
-import Places from './Places.jsx';
+import Places from "./Places.jsx";
 import { useEffect, useState } from "react";
+import ErrorPage from "./Error.jsx";
+import { sortPlacesByDistance } from "../loc.js";
+import { getAvailablePlaces } from "../http.js";
 
 export default function AvailablePlaces({ onSelectPlace }) {
   const [availablePlaces, setAvailablePlaces] = useState([]);
   const [isFetching, setIsFetching] = useState(false);
+  const [error, setError] = useState(null);
 
-  useEffect(() => {
-    async function fetchPlaces() {
-      setIsFetching(true); // toggle fetching state
-      const response = await fetch('http://localhost:3000/places');
-      const resData = await response.json();
-      setAvailablePlaces(resData.places);
+  async function fetchPlaces() {
+    setIsFetching(true); // toggle fetching state
+
+    // Error catching
+    try {
+      const places = await getAvailablePlaces();
+
+      navigator.geolocation.getCurrentPosition((position) => {
+        const sortedPlaces = sortPlacesByDistance(places, position.coords.latitude, position.coords.longitude);
+        setAvailablePlaces(sortedPlaces);
+        setIsFetching(false);
+      });
+
+    } catch (error) {
+      setError(error);
       setIsFetching(false);
     }
-    fetchPlaces();
+  }
 
-/*    fetch('http://localhost:3000/places')
-      .then((response) => {return response.json()}) // resoles the promise
-      .then((responseData) => {
-        setAvailablePlaces(responseData.places) // have a look at the backend code to see what the response looks like
-      })*/
-  }, [])
+  useEffect(() => {
+    // GET request to fetch places
+    fetchPlaces();
+  }, []);
+
+
+  if (error) {
+    return (
+      <ErrorPage
+        title="Error occured"
+        message={error.message}
+        onConfirm={() => setError(null)}
+      />
+    );
+  }
 
   return (
     <Places

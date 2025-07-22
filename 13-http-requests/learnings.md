@@ -9,3 +9,4 @@
 - `fetch` returns a promise, so we need to use `.then()` to handle the response or await the response
 - resolve the promise with `response.json()` to get the data in JSON format
 - implementing `loadingState` and `errorState` is a good practice to handle the state of the request
+- wrapping the fetch call in a try-catch block helps to catch client and server side errors
