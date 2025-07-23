@@ -2,6 +2,7 @@
   "plugins": [
     "prettier-plugin-organize-attributes"
   ],
+  "printWidth": 150,
   "organizeAttributes": {
     "maxAttrsOnTag": 2,
     "multiline": "force"
