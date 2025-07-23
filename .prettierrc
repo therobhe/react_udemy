@@ -1,3 +1,10 @@
 {
+  "plugins": [
+    "prettier-plugin-organize-attributes"
+  ],
+  "organizeAttributes": {
+    "maxAttrsOnTag": 2,
+    "multiline": "force"
+  },
   "bracketSpacing": true
 }
