@@ -1,5 +1,6 @@
 import Input from "./Input";
-import useInput from "../../hooks/useInput.js";
+import useInput from "../../hooks/useInput.jsx";
+import { hasMinLength, isEmail, isNotEmpty } from "../util/validation.js";
 
 /*
  * State solution:
@@ -7,7 +8,33 @@ import useInput from "../../hooks/useInput.js";
  * Con: more boilerplate code, state management can get complex with many fields, handleFunctions needed
  * */
 export default function Login() {
-  const { formData, handleBlur, handleInputChange, handleSubmit, emailIsInvalid, passwordIsInvalid } = useInput();
+  const {
+    enteredValue: emailValue,
+    handleInputChange: handleEmailChange,
+    handleBlur: handleEmailBlur,
+    hasError: emailHasError
+  } = useInput("", (value) => {
+    return isEmail(value) && isNotEmpty(value);
+  });
+  const {
+    enteredValue: passwordValue,
+    handleInputChange: handlePasswordChange,
+    handleBlur: handlePasswordBlur,
+    hasError: passwordHasError
+  } = useInput("", (value) => {
+    hasMinLength(value, 6);
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (emailHasError || passwordHasError) {
+      return;
+    }
+
+    console.log("Sending HTTP Request...");
+    console.log(emailValue, passwordValue);
+  };
 
   return (
     <form onSubmit={handleSubmit} noValidate={true}>
@@ -19,14 +46,10 @@ export default function Login() {
           id={"email"}
           type={"email"}
           name={"email"}
-          error={emailIsInvalid && "Please enter a valid email address."}
-          onBlur={(event) => {
-            handleBlur(event.target.name);
-          }}
-          onChange={(event) => {
-            handleInputChange(event.target.value, event.target.name);
-          }}
-          value={formData.email}
+          error={emailHasError && "Please enter a valid email address."}
+          onBlur={handleEmailBlur}
+          onChange={handleEmailChange}
+          value={emailValue}
         />
 
         <Input
@@ -34,14 +57,10 @@ export default function Login() {
           id={"password"}
           type={"password"}
           name={"password"}
-          error={passwordIsInvalid && "Passwort must be at least 6 characters long."}
-          onBlur={(event) => {
-            handleBlur(event.target.name);
-          }}
-          onChange={(event) => {
-            handleInputChange(event.target.value, event.target.name);
-          }}
-          value={formData.password}
+          error={passwordHasError && "Passwort must be at least 6 characters long."}
+          onBlur={handlePasswordBlur}
+          onChange={handlePasswordChange}
+          value={passwordValue}
         />
       </div>
 
