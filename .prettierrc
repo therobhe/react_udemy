@@ -3,6 +3,7 @@
     "prettier-plugin-organize-attributes"
   ],
   "printWidth": 150,
+  "trailingComma": "none",
   "organizeAttributes": {
     "maxAttrsOnTag": 2,
     "multiline": "force"

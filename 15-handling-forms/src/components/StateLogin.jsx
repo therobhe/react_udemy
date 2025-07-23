@@ -1,5 +1,5 @@
-import { useState } from "react";
 import Input from "./Input";
+import useInput from "../../hooks/useInput.js";
 
 /*
  * State solution:
@@ -7,47 +7,12 @@ import Input from "./Input";
  * Con: more boilerplate code, state management can get complex with many fields, handleFunctions needed
  * */
 export default function Login() {
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
-
-  const [wasEdited, setWasEdited] = useState({
-    email: false,
-    password: false,
-  });
-
-  const emailIsInvalid = !formData.email.includes("@") && formData.email.length > 0 && wasEdited.email;
-
-  const passwordIsInvalid = formData.password.trim().length < 6 && wasEdited.password;
+  const { formData, handleBlur, handleInputChange, emailIsInvalid, passwordIsInvalid } = useInput();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Form submitted");
     console.log(formData.email, formData.password);
-  };
-
-  const handleInputChange = (value, identifier) => {
-    setWasEdited({
-      ...wasEdited,
-      [identifier]: false,
-    });
-
-    setFormData((prevData) => {
-      return {
-        ...prevData,
-        [identifier]: value,
-      };
-    });
-  };
-
-  const handleBlur = (identifier) => {
-    setWasEdited((prevState) => {
-      return {
-        ...prevState,
-        [identifier]: true,
-      };
-    });
   };
 
   return (
