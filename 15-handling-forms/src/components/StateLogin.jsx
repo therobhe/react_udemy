@@ -7,13 +7,7 @@ import useInput from "../../hooks/useInput.js";
  * Con: more boilerplate code, state management can get complex with many fields, handleFunctions needed
  * */
 export default function Login() {
-  const { formData, handleBlur, handleInputChange, emailIsInvalid, passwordIsInvalid } = useInput();
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Form submitted");
-    console.log(formData.email, formData.password);
-  };
+  const { formData, handleBlur, handleInputChange, handleSubmit, emailIsInvalid, passwordIsInvalid } = useInput();
 
   return (
     <form onSubmit={handleSubmit} noValidate={true}>

@@ -39,11 +39,22 @@ export default function useInput(initialValue = "") {
     });
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (emailIsInvalid || passwordIsInvalid) {
+      return;
+    }
+
+    console.log("Form submitted");
+    console.log(formData.email, formData.password);
+  };
+
   return {
     formData,
     emailIsInvalid,
     passwordIsInvalid,
     handleInputChange,
-    handleBlur
+    handleBlur,
+    handleSubmit
   };
 }
