@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { hasMinLength, isEmail, isNotEmpty } from "../src/util/validation.js";
+import { hasMinLength, isEmail } from "../src/util/validation.js";
 
 export default function useInput(initialValue = "") {
   const [formData, setFormData] = useState({
