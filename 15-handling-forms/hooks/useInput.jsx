@@ -19,7 +19,6 @@ export default function useInput(initialValue = "", validationFn) {
     handleBlur,
     handleInputChange,
     enteredValue,
-    isTouched,
     hasError: isTouched && !valueIsValid
   };
 }
