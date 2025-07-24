@@ -14,3 +14,5 @@
 /package.json
 /package-lock.json
 /16-handling-form-actions/node_modules/
+/16_2-sending-form-data-to-backend/node_modules/
+/16_2-sending-form-data-to-backend/backend/node_modules/
