@@ -1,5 +1,6 @@
 import { useActionState, useContext } from "react";
 import { OpinionsContext } from "../store/opinions-context.jsx";
+import Submit from "./Submit.jsx";
 
 export function NewOpinion() {
   const { addOpinion } = useContext(OpinionsContext);
@@ -75,9 +76,14 @@ export function NewOpinion() {
           </ul>
         )}
 
+        <Submit />
+
+        {/*Solution with pending from useActionState
         <p className="actions">
-          <button type="submit">Submit</button>
-        </p>
+          <button type="submit" disabled={pending}>
+            {pending ? "Sending" : "Submit"}
+          </button>
+        </p>*/}
       </form>
     </div>
   );
