@@ -2,14 +2,14 @@
   "opinions": [
     {
       "id": 1753351984676,
-      "votes": 0,
+      "votes": 1,
       "userName": "asd",
       "title": "asd",
       "body": "asd"
     },
     {
       "id": 1753351678227,
-      "votes": 0,
+      "votes": -1,
       "userName": "asd",
       "title": "asd",
       "body": "asd"
