@@ -1,6 +1,58 @@
+import { isEmail, isNotEmpty, isEqualToOtherValue, hasMinLength } from "../util/validation.js";
+import { useActionState } from "react";
+
 export default function Signup() {
+  const signUpAction = (prevFormState, formData) => {
+    const email = formData.get("email");
+    const password = formData.get("password");
+    const confirmPassword = formData.get("confirm-password");
+    const firstName = formData.get("first-name");
+    const lastName = formData.get("last-name");
+    const role = formData.get("role");
+    const acquisition = formData.getAll("acquisition");
+    const terms = formData.get("terms-and-conditions");
+
+    let errors = [];
+    if (!isEmail(email)) {
+      errors.push("Please enter a valid email address.");
+    }
+
+    if (!isNotEmpty(password) || !hasMinLength(password, 6)) {
+      errors.push("Password must be entered and at least 6 characters long.");
+    }
+
+    if (!isEqualToOtherValue(password, confirmPassword)) {
+      errors.push("Passwords do not match.");
+    }
+
+    if (!isNotEmpty(firstName) || !isNotEmpty(lastName)) {
+      errors.push("Please enter both names.");
+    }
+
+    if (!isNotEmpty(role)) {
+      errors.push("Please select your role.");
+    }
+
+    if (acquisition.length === 0) {
+      errors.push("Please select at least one acquisition channel.");
+    }
+
+    if (!terms) {
+      errors.push("You must agree to the terms and conditions.");
+    }
+
+    if (errors.length > 0) {
+      return { errors };
+    }
+
+    console.log("Sending HTTP Request...");
+    return { errors: null };
+  };
+
+  const [formState, formAction, pending] = useActionState(signUpAction, { errors: null });
+
   return (
-    <form>
+    <form action={formAction}>
       <h2>Welcome on board!</h2>
       <p>We just need a little bit of data from you to get you started 🚀</p>
 
@@ -17,11 +69,7 @@ export default function Signup() {
 
         <div className="control">
           <label htmlFor="confirm-password">Confirm Password</label>
-          <input
-            id="confirm-password"
-            type="password"
-            name="confirm-password"
-          />
+          <input id="confirm-password" type="password" name="confirm-password" />
         </div>
       </div>
 
@@ -53,22 +101,12 @@ export default function Signup() {
       <fieldset>
         <legend>How did you find us?</legend>
         <div className="control">
-          <input
-            type="checkbox"
-            id="google"
-            name="acquisition"
-            value="google"
-          />
+          <input type="checkbox" id="google" name="acquisition" value="google" />
           <label htmlFor="google">Google</label>
         </div>
 
         <div className="control">
-          <input
-            type="checkbox"
-            id="friend"
-            name="acquisition"
-            value="friend"
-          />
+          <input type="checkbox" id="friend" name="acquisition" value="friend" />
           <label htmlFor="friend">Referred by friend</label>
         </div>
 
@@ -80,10 +118,17 @@ export default function Signup() {
 
       <div className="control">
         <label htmlFor="terms-and-conditions">
-          <input type="checkbox" id="terms-and-conditions" name="terms" />I
-          agree to the terms and conditions
+          <input type="checkbox" id="terms-and-conditions" name="terms" />I agree to the terms and conditions
         </label>
       </div>
+
+      {formState.errors && (
+        <ul className="error">
+          {formState.errors.map((error) => {
+            return <li key={error}>{error}</li>;
+          })}
+        </ul>
+      )}
 
       <p className="form-actions">
         <button type="reset" className="button button-flat">
