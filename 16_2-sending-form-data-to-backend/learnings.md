@@ -25,6 +25,7 @@ It supports extracting form values and manages them in a stateful way.
 - is a hook that can be used to change the state of a value of a form before the action is completed (evaluated by the backend e.g.)
 - takes the initial form value and a function that has the previousValue and a dispatch keyword as arguments
 - returns the optimisticValue and a dispatch function (like useState)
+- the optimistic Value is replaced by the final value once the action is completed
 
 ## useFormStatus()
 - is a hook that can be used to manage the status of a form
