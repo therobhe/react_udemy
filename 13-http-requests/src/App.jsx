@@ -21,9 +21,8 @@ function App() {
     try {
       const fetchedUserPlaces = await fetchUserPlacesOnReload();
       setUserPlaces(fetchedUserPlaces);
-
     } catch (error) {
-      setError({message: error.message || "Failed to fetch user places."})
+      setErrorUpdatingPlaces({ message: error.message || "Failed to fetch user places." });
     }
     setIsFetching(false);
   }
@@ -37,7 +36,6 @@ function App() {
     try {
       const responseMessage = await updateUserPlaces(places);
       console.log(responseMessage);
-
     } catch (error) {
       setErrorUpdatingPlaces({ message: error.message || "Failes to update user places." });
       setUserPlaces(previousPlaces);
@@ -67,20 +65,21 @@ function App() {
     sendUserPlacesToServer([...userPlaces, selectedPlace]);
   }
 
-  const handleRemovePlace = useCallback(async function handleRemovePlace() {
-    setUserPlaces((prevPickedPlaces) =>
-      prevPickedPlaces.filter((place) => place.id !== selectedPlace.current.id)
-    );
+  const handleRemovePlace = useCallback(
+    async function handleRemovePlace() {
+      setUserPlaces((prevPickedPlaces) => prevPickedPlaces.filter((place) => place.id !== selectedPlace.current.id));
 
-    try {
-      await updateUserPlaces(userPlaces.filter((place) => place.id !== selectedPlace.current.id))
-    } catch (error) {
-      setUserPlaces(userPlaces)
-      setErrorUpdatingPlaces({message: error.message || "Failed to remove place."});
-    }
+      try {
+        await updateUserPlaces(userPlaces.filter((place) => place.id !== selectedPlace.current.id));
+      } catch (error) {
+        setUserPlaces(userPlaces);
+        setErrorUpdatingPlaces({ message: error.message || "Failed to remove place." });
+      }
 
-    setModalIsOpen(false);
-  }, [userPlaces]);
+      setModalIsOpen(false);
+    },
+    [userPlaces]
+  );
 
   function handleError() {
     setErrorUpdatingPlaces(null);
@@ -89,23 +88,16 @@ function App() {
   return (
     <>
       <Modal open={errorUpdatingPlaces}>
-        {errorUpdatingPlaces &&
-          <ErrorPage title="Error occured" message={errorUpdatingPlaces.message} onConfirm={handleError} />}
+        {errorUpdatingPlaces && <ErrorPage title="Error occured" message={errorUpdatingPlaces.message} onConfirm={handleError} />}
       </Modal>
       <Modal open={modalIsOpen} onClose={handleStopRemovePlace}>
-        <DeleteConfirmation
-          onCancel={handleStopRemovePlace}
-          onConfirm={handleRemovePlace}
-        />
+        <DeleteConfirmation onCancel={handleStopRemovePlace} onConfirm={handleRemovePlace} />
       </Modal>
 
       <header>
         <img src={logoImg} alt="Stylized globe" />
         <h1>PlacePicker</h1>
-        <p>
-          Create your personal collection of places you would like to visit or
-          you have visited.
-        </p>
+        <p>Create your personal collection of places you would like to visit or you have visited.</p>
       </header>
       <main>
         <Places
