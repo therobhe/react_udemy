@@ -3,7 +3,6 @@ import { useContext } from "react";
 import { OrderContext } from "../../store/OrderContext.jsx";
 
 export default function Meal(props) {
-  // Todo: get the meal data from props or context
   const { addItemToCart } = useContext(OrderContext);
 
   return (

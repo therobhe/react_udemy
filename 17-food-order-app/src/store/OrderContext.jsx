@@ -16,8 +16,6 @@ export const OrderContext = createContext({
 });
 
 export function OrderContextProvider({ children }) {
-  //TODO: fetch the meals from the server in useEffect and store them inside state
-  //TODO: implement addItemToCart and removeItemFromCart functions
   const [orderItems, setOrderItems] = useState([]);
   const [cartItems, setCartItems] = useState([]);
 
