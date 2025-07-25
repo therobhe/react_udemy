@@ -46,7 +46,7 @@ export function NewOpinion() {
     return { error: null };
   };
 
-  const [formData, formAction, pending] = useActionState(submitNewOpinion, { error: null });
+  const [formData, formAction] = useActionState(submitNewOpinion, { error: null });
 
   return (
     <div id="new-opinion">
