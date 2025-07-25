@@ -20,6 +20,20 @@ export function OrderContextProvider({ children }) {
   useEffect(() => {
     async function fetchMeals() {
       console.log("Fetching meals from the server...");
+      try {
+        const response = await fetch("http://localhost:3000/meals");
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch meals");
+        }
+
+        const data = await response.json();
+        setOrderItems(data);
+
+        console.log("Meals fetched successfully:", data);
+      } catch (error) {
+        return console.error("Error fetching meals:", error);
+      }
     }
 
     fetchMeals();
