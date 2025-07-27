@@ -45,6 +45,15 @@ export default function Cart() {
         })}
       </ul>
       <div className="cart-total">Total Price: {cartTotalPrice}€</div>
+      <div className="cart-item-actions">
+        <button
+          onClick={() => {
+            setModalStep(1);
+          }}
+        >
+          >
+        </button>
+      </div>
     </aside>
   );
 }

@@ -16,7 +16,8 @@ export const OrderContext = createContext({
   setModalStep: (step) => {},
   addItemToCart: (item) => {},
   removeItemFromCart: (id) => {},
-  setModalIsOpen: (bool) => {}
+  setModalIsOpen: (bool) => {},
+  resetCart: () => {}
 });
 
 export function OrderContextProvider({ children }) {
@@ -65,13 +66,10 @@ export function OrderContextProvider({ children }) {
       setCartItems((prevCart) => {
         return [...prevCart, { id, quantity: 1 }];
       });
-      console.log("added new item to cart", id);
     }
   };
 
   const removeItemFromCart = (id) => {
-    console.log("removeing item from cart", id);
-
     setCartItems((prevCart) => {
       return prevCart.reduce((newCart, item) => {
         if (item.id !== id) {
@@ -80,6 +78,10 @@ export function OrderContextProvider({ children }) {
         return newCart;
       }, []);
     });
+  };
+
+  const resetCart = () => {
+    setCartItems([]);
   };
 
   const contextValue = {
@@ -92,7 +94,8 @@ export function OrderContextProvider({ children }) {
     addItemToCart,
     removeItemFromCart,
     setModalIsOpen,
-    setModalStep
+    setModalStep,
+    resetCart
   };
 
   return <OrderContext.Provider value={contextValue}>{children}</OrderContext.Provider>;

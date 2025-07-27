@@ -31,7 +31,7 @@ export default function Modal() {
       >
         ×
       </button>
-      {modalIsOpen ? modalStep === 0 ? <Cart /> : <CheckoutForm /> : null}
+      {modalIsOpen ? modalStep === 0 ? <Cart /> : <CheckoutForm dialogRef={dialog} /> : null}
     </dialog>,
     document.getElementById("modal")
   );

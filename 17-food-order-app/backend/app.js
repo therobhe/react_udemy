@@ -2,6 +2,7 @@ import fs from "node:fs/promises";
 
 import bodyParser from "body-parser";
 import express from "express";
+import cors from "cors";
 
 const app = express();
 
@@ -14,6 +15,8 @@ app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
   next();
 });
+
+app.use(cors({ origin: "http://localhost:5173" }));
 
 app.get("/meals", async (req, res) => {
   const meals = await fs.readFile("./data/available-meals.json", "utf8");
