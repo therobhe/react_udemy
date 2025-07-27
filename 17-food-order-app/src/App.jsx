@@ -6,7 +6,7 @@ import Modal from "./components/Modal.jsx";
 function App() {
   return (
     <OrderContextProvider>
-      {/*<Modal />*/}
+      <Modal />
       <Header />
       <main>
         <FoodList />

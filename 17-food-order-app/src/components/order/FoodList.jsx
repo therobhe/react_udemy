@@ -7,7 +7,7 @@ export default function FoodList() {
 
   return (
     <section id="food-list">
-      <h2 className="text-center">Available Meals</h2>
+      <h2 className="center">Available Meals</h2>
       <ul id="meals">
         {availableMeals.map((meal) => {
           return <Meal key={meal.id} {...meal} />;

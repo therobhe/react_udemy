@@ -9,15 +9,21 @@ import { createContext, useEffect, useState } from "react";
 export const OrderContext = createContext({
   orderItems: [],
   cartItems: [],
+  modalStep: 0,
   isFetching: false,
+  modalIsOpen: false,
   errorLoadingMeals: null,
+  setModalStep: (step) => {},
   addItemToCart: (item) => {},
-  removeItemFromCart: (id) => {}
+  removeItemFromCart: (id) => {},
+  setModalIsOpen: (bool) => {}
 });
 
 export function OrderContextProvider({ children }) {
   const [orderItems, setOrderItems] = useState([]);
   const [cartItems, setCartItems] = useState([]);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [modalStep, setModalStep] = useState(0);
 
   // Async and Error handling states
   const [errorLoadingMeals, setErrorLoadingMeals] = useState(null);
@@ -64,17 +70,29 @@ export function OrderContextProvider({ children }) {
   };
 
   const removeItemFromCart = (id) => {
-    // TODO: search for item id and remove it from the cart
-    console.log("meal removed: ", id);
+    console.log("removeing item from cart", id);
+
+    setCartItems((prevCart) => {
+      return prevCart.reduce((newCart, item) => {
+        if (item.id !== id) {
+          newCart.push(item);
+        }
+        return newCart;
+      }, []);
+    });
   };
 
   const contextValue = {
     orderItems,
+    modalIsOpen,
     cartItems,
+    modalStep,
     isFetching,
     errorLoadingMeals,
     addItemToCart,
-    removeItemFromCart
+    removeItemFromCart,
+    setModalIsOpen,
+    setModalStep
   };
 
   return <OrderContext.Provider value={contextValue}>{children}</OrderContext.Provider>;

@@ -1,14 +1,15 @@
-export default function CartItem() {
-  // Todo: fetch the cart item details from context or props
+export default function CartItem({ props, removeItemFromCart }) {
+  const priceXQuantity = props.price * props.quantity;
 
   return (
     <li className="cart-item">
-      <div className="item-details">
-        <h3>Meal Name</h3>
-        <p className="price">$12.99</p>
-        <p className="quantity">x2</p>
-      </div>
-      <button className="remove-item">Remove</button>
+      <p>{props.name}</p>
+      <p className="price">{props.price}€</p>
+      <p className="quantity">x{props.quantity}</p>
+      <p className="price">{priceXQuantity}€</p>
+      <button className="remove-item" onClick={removeItemFromCart}>
+        Remove
+      </button>
     </li>
   );
 }
