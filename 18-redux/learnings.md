@@ -26,3 +26,5 @@ Components NEVER directly manipulate the stores data!!! State changes are done b
 ## Redux Toolkit
 - helps seperating concerns inside the store by creating slices of state that belongs together
 - you cannot accidentally mutate the original state inside redux.toolkit function like createSlice(), which means, you can directly update some state
+  - dispatch = useDispatch() is there for triggering the exposed reducer functions of a slice
+  - useSelector() is there to access the state.value of a slice

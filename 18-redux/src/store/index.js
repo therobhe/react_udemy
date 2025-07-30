@@ -1,10 +1,24 @@
 import { createSlice, configureStore } from "@reduxjs/toolkit";
 
-const initialState = { counter: 0, showCounter: true };
+const initialCounterState = { counter: 0, showCounter: true };
+const initialAuthState = { loggedIn: false };
+
+const authSlice = createSlice({
+  name: "auth",
+  initialState: initialAuthState,
+  reducers: {
+    login: (state) => {
+      state.loggedIn = true;
+    },
+    logout: (state) => {
+      state.loggedIn = false;
+    }
+  }
+});
 
 const counterSlice = createSlice({
   name: "counter",
-  initialState,
+  initialState: initialCounterState,
   reducers: {
     increment: (state, action) => {
       state.counter = state.counter + action.payload;
@@ -36,10 +50,14 @@ const counterSlice = createSlice({
 };*/
 
 const store = configureStore({
-  reducer: counterSlice.reducer
+  reducer: {
+    counter: counterSlice.reducer,
+    auth: authSlice.reducer
+  }
 });
 
 export const counterActions = counterSlice.actions;
+export const authActions = authSlice.actions;
 
 // connect react app to the store by providing it at the most top level: index.js in the project root
 export default store;
