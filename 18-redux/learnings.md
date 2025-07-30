@@ -6,3 +6,6 @@ Moreover, it prevents the context overload or multiple nested context.providers,
 - aside from that:
 
 ## How Redux works
+"It's like youtube" - Components subscribe to this omnipotent central state, but only to the parts they need.
+Components NEVER directly manipulate the stores data!!! State changes are done by reducer functions. Which are activated by dispatched actions from a component.
+
