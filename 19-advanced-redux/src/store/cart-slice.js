@@ -31,6 +31,11 @@ export const cartSlice = createSlice({
         existingItem.quantity--;
         existingItem.totalPrice = existingItem.totalPrice - existingItem.price;
       }
+    },
+    replaceCart: (state, action) => {
+      console.log(action);
+      state.items = action.payload.items || [];
+      state.totalQuantity = action.payload.totalQuantity || 0;
     }
   }
 });
@@ -69,6 +74,44 @@ export function sendCartToFirebase(cart) {
           status: "error",
           title: "Error appeared!",
           message: "Data was not send."
+        })
+      );
+    }
+  };
+}
+
+export function getInitialCartState() {
+  return async (dispatch) => {
+    dispatch(uiActions.showNotification({ status: "fetching", title: "fetching data..", message: "fetching data to firebase..." }));
+
+    const fetchFirebaseData = async () => {
+      const response = await fetch("https://udemy-testing-a7fd5-default-rtdb.firebaseio.com/cart.json");
+      const responseData = await response.json();
+
+      if (!response.ok) {
+        throw new Error("Something went wrong!.");
+      }
+
+      // setting the data to the state.cart
+      dispatch(cartSlice.actions.replaceCart(responseData));
+
+      dispatch(
+        uiActions.showNotification({
+          status: "success",
+          title: "Successfully fetched!",
+          message: "Data was fetched successfully."
+        })
+      );
+    };
+
+    try {
+      await fetchFirebaseData();
+    } catch (error) {
+      dispatch(
+        uiActions.showNotification({
+          status: "error",
+          title: "Error appeared!",
+          message: "Data was fetched errorfully."
         })
       );
     }

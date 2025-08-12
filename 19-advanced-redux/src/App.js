@@ -4,7 +4,7 @@ import Products from "./components/Shop/Products";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import Notification from "./components/UI/Notification";
-import { sendCartToFirebase } from "./store/cart-slice";
+import { getInitialCartState, sendCartToFirebase } from "./store/cart-slice";
 
 // things defined here wont run on each re-render but only on parsing the file (effectively just once)
 let isInitial = true;
@@ -17,6 +17,8 @@ function App() {
 
   useEffect(() => {
     if (isInitial) {
+      console.log("Initial load");
+      dispatch(getInitialCartState());
       isInitial = false;
       return;
     }
