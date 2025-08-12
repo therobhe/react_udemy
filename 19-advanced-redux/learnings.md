@@ -28,4 +28,17 @@ In order to perform side effects like HTTP Requests we will use own action creaa
 - ```const removeItemHandler = () => {dispatch(cartActions.removeItemFromCart())}```
 
 
+## Async operations and Redux
+- fetching or async writing to a DB cannot happen inside the reducer, they must be pure, side-effect-free and synchronous
+- typically this is done either inside the components useEffect (ignore redux) or inside the action creator!
+
+
+The basic question you need to ask yourself is:
+Fat Reducers vs Fat Components vs Fat Actions
+
+- if no side effects & no async code --> reducers
+- if side effects or async operations --> action creators or inside the component
+
+If both is the case: use useEffect() inside the component
+
 
