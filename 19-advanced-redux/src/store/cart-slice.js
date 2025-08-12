@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialCartState = {
-  items: [{ id: "i1", title: "Test Item", quantity: 3, totalPrice: 18, price: 6 }],
+  items: [{ id: "i1", title: "Test Item", quantity: 1, totalPrice: 18, price: 6 }],
   totalQuantity: 1
 };
 
@@ -28,7 +28,7 @@ export const cartSlice = createSlice({
         state.items = state.items.filter((item) => item.id !== id);
       } else {
         existingItem.quantity--;
-        existingItem.totalPrice = existingItem.total - existingItem.price;
+        existingItem.totalPrice = existingItem.totalPrice - existingItem.price;
       }
     }
   }
