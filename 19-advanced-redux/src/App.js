@@ -17,13 +17,16 @@ function App() {
 
   useEffect(() => {
     if (isInitial) {
-      console.log("Initial load");
       dispatch(getInitialCartState());
       isInitial = false;
       return;
     }
+  }, [dispatch]);
 
-    dispatch(sendCartToFirebase(cart));
+  useEffect(() => {
+    if (cart.changed) {
+      dispatch(sendCartToFirebase(cart));
+    }
   }, [cart, dispatch]);
 
   return (

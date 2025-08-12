@@ -3,7 +3,8 @@ import { uiActions } from "./index";
 
 const initialCartState = {
   items: [{ id: "i1", title: "Test Item", quantity: 1, totalPrice: 18, price: 6 }],
-  totalQuantity: 1
+  totalQuantity: 1,
+  changed: false
 };
 
 export const cartSlice = createSlice({
@@ -14,6 +15,7 @@ export const cartSlice = createSlice({
       state.totalQuantity++;
       const targetItem = action.payload;
       const existingItem = state.items.find((item) => item.id === targetItem.id);
+      state.changed = true;
       if (!existingItem) {
         state.items.push({ id: targetItem.id, price: targetItem.price, quantity: 1, totalPrice: targetItem.price, title: targetItem.title }); // only possible with redux toolkit!!! mutation of org array
       } else {
@@ -25,6 +27,7 @@ export const cartSlice = createSlice({
       state.totalQuantity--;
       const id = action.payload;
       const existingItem = state.items.find((item) => item.id === id);
+      state.changed = true;
       if (existingItem.quantity === 1) {
         state.items = state.items.filter((item) => item.id !== id);
       } else {
@@ -33,7 +36,6 @@ export const cartSlice = createSlice({
       }
     },
     replaceCart: (state, action) => {
-      console.log(action);
       state.items = action.payload.items || [];
       state.totalQuantity = action.payload.totalQuantity || 0;
     }
@@ -50,7 +52,7 @@ export function sendCartToFirebase(cart) {
     const sendRequest = async () => {
       const response = await fetch("https://udemy-testing-a7fd5-default-rtdb.firebaseio.com/cart.json", {
         method: "PUT",
-        body: JSON.stringify(cart)
+        body: JSON.stringify({ items: cart.items, totalQuantity: cart.totalQuantity })
       });
 
       if (!response.ok) {
@@ -82,8 +84,6 @@ export function sendCartToFirebase(cart) {
 
 export function getInitialCartState() {
   return async (dispatch) => {
-    dispatch(uiActions.showNotification({ status: "fetching", title: "fetching data..", message: "fetching data to firebase..." }));
-
     const fetchFirebaseData = async () => {
       const response = await fetch("https://udemy-testing-a7fd5-default-rtdb.firebaseio.com/cart.json");
       const responseData = await response.json();
@@ -94,14 +94,6 @@ export function getInitialCartState() {
 
       // setting the data to the state.cart
       dispatch(cartSlice.actions.replaceCart(responseData));
-
-      dispatch(
-        uiActions.showNotification({
-          status: "success",
-          title: "Successfully fetched!",
-          message: "Data was fetched successfully."
-        })
-      );
     };
 
     try {
