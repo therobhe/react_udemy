@@ -22,3 +22,5 @@
 /18-redux-testing/node_modules/
 /19-advanced-redux/node_modules/
 /20-react-router/node_modules/
+/21-react-router-advanced/frontend/node_modules/
+/21-react-router-advanced/backend/node_modules/
