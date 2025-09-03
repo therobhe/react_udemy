@@ -9,6 +9,7 @@ import EventsPage, { eventsLoader } from "./routes/EventsPage";
 import { eventDetailLoader } from "./routes/EventDetailPage";
 import EventsRootLayout from "./routes/EventsRoot";
 import { eventAction } from "./components/EventForm";
+import NewsletterPage, { newsletterAction } from "./components/Newsletter";
 
 const router = createBrowserRouter([
   {
@@ -43,7 +44,12 @@ const router = createBrowserRouter([
             ]
           },
         ]
-      }
+      },
+      {
+        path: 'newsletter',
+        element: <NewsletterPage />,
+        action: newsletterAction,
+      },
     ]
   }
 ]);
