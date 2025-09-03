@@ -4,7 +4,7 @@ import ErrorPage from "./routes/ErrorPage";
 import HomePage from "./routes/HomePage";
 import EditEventPage from "./routes/EditEventPage";
 import NewEventPage from "./routes/NewEventPage";
-import EventDetailPage from "./routes/EventDetailPage";
+import EventDetailPage, { deleteEventAction } from "./routes/EventDetailPage";
 import EventsPage, { eventsLoader } from "./routes/EventsPage";
 import { eventDetailLoader } from "./routes/EventDetailPage";
 import EventsRootLayout from "./routes/EventsRoot";
@@ -38,7 +38,7 @@ const router = createBrowserRouter([
           // in order to use one loaders data in multiple components, we can move the loader to the parent route
           {
             path: ":eventID", loader: eventDetailLoader, id: "event-detail", children: [
-              { index: true, element: <EventDetailPage />, name: "EventDetailPage", },
+              { index: true, element: <EventDetailPage />, name: "EventDetailPage", action: deleteEventAction },
               { path: "edit", element: <EditEventPage />, name: "EditEventPage" }
             ]
           },
