@@ -13,7 +13,6 @@ export default function NewEventPage() {
 // This action function catches the <Form> submission and makes its values available with the request object
 export async function newEventAction({ request, params }) {
   const formData = await request.formData();
-  console.log("formData", formData);
 
   const eventData = {
     title: formData.get("title"),
@@ -29,6 +28,10 @@ export async function newEventAction({ request, params }) {
     },
     body: JSON.stringify(eventData)
   });
+
+  if (response.status === 422) {
+    return response;
+  }
 
   if (!response.ok) {
     throw new Response(
