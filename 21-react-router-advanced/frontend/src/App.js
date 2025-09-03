@@ -2,7 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import RootLayout from "./routes/RootLayout";
 import ErrorPage from "./routes/ErrorPage";
 import HomePage from "./routes/HomePage";
-import EditEventPage from "./routes/NewEventPage";
+import EditEventPage from "./routes/EditEventPage";
 import NewEventPage from "./routes/NewEventPage";
 import EventDetailPage from "./routes/EventDetailPage";
 import EventsPage, { eventsLoader } from "./routes/EventsPage";
@@ -34,8 +34,13 @@ const router = createBrowserRouter([
             loader: eventsLoader
           },
           { path: "new", element: <NewEventPage />, name: "NewEventPage" },
-          { path: ":eventID", element: <EventDetailPage />, name: "EventDetailPage", loader: eventDetailLoader },
-          { path: ":eventID/edit", element: <EditEventPage />, name: "EditEventPage" }
+          // in order to use one loaders data in multiple components, we can move the loader to the parent route
+          {
+            path: ":eventID", loader: eventDetailLoader, id: "event-detail", children: [
+              { index: true, element: <EventDetailPage />, name: "EventDetailPage", },
+              { path: "edit", element: <EditEventPage />, name: "EditEventPage" }
+            ]
+          },
         ]
       }
     ]
