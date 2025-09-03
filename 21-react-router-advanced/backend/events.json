@@ -1,11 +1,1 @@
-{
-  "events": [
-    {
-      "id": "e1",
-      "title": "A dummy event",
-      "date": "2023-02-22",
-      "image": "https://blog.hubspot.de/hubfs/Germany/Blog_images/Optimize_Marketing%20Events%20DACH%202021.jpg",
-      "description": "Join this amazing event and connect with fellow developers."
-    }
-  ]
-}
+{"events":[{"title":"Highfield","image":"https://highfield.de/fileadmin/_processed_/e/5/csm_HF_16_Atmo_Robin_Schmiedebach_20160821_185114_eebd841155.jpg","date":"2025-08-12","description":"Low festival","id":"e26b3563-685c-480e-991d-3c422bea2e22"},{"title":"aspir","image":"https://blog.hubspot.de/hubfs/Germany/Blog_images/Optimize_Marketing%20Events%20DACH%202021.jpg","date":"2015-10-12","description":"supposed to happen","id":"d838b9f6-9844-4c55-89e3-2149c6f27742"},{"id":"e1","title":"A dummy event","date":"2023-02-22","image":"https://blog.hubspot.de/hubfs/Germany/Blog_images/Optimize_Marketing%20Events%20DACH%202021.jpg","description":"Join this amazing event and connect with fellow developers."}]}
