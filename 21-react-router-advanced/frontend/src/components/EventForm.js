@@ -1,3 +1,4 @@
+import { redirect } from "react-router-dom";
 import { Form, useActionData, useNavigate, useNavigation } from 'react-router-dom';
 
 import classes from './EventForm.module.css';
@@ -13,7 +14,7 @@ function EventForm({ method, event }) {
   }
 
   return (
-    <Form className={classes.form} method="post">
+    <Form className={classes.form} method={method}>
       {data && data.erros && <ul>
         {Object.values(data.erros).map(err => <li key={err}>{err}</li>)}
       </ul>}
@@ -44,3 +45,47 @@ function EventForm({ method, event }) {
 }
 
 export default EventForm;
+
+// This action function catches the <Form> submission and makes its values available with the request object
+export async function eventAction({ request, params }) {
+  const formData = await request.formData();
+  const method = request.method;
+  console.log(request);
+
+
+  const eventData = {
+    title: formData.get("title"),
+    image: formData.get("image"),
+    date: formData.get("date"),
+    description: formData.get("description"),
+  };
+
+  let url = 'http://localhost:8080/events';
+
+  if (method === 'PATCH') {
+    const eventID = params.eventID;
+    url = 'http://localhost:8080/events/' + eventID;
+  }
+
+  const response = await fetch(url, {
+    method: method,
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(eventData)
+  });
+
+  if (response.status === 422) {
+    return response;
+  }
+
+  if (!response.ok) {
+    throw new Response(
+      JSON.stringify({ message: 'Could not save event.' }),
+      {
+        status: 500
+      });
+  }
+
+  return redirect('/events');
+}

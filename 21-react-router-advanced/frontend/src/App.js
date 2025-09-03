@@ -8,7 +8,7 @@ import EventDetailPage, { deleteEventAction } from "./routes/EventDetailPage";
 import EventsPage, { eventsLoader } from "./routes/EventsPage";
 import { eventDetailLoader } from "./routes/EventDetailPage";
 import EventsRootLayout from "./routes/EventsRoot";
-import { newEventAction } from "./routes/NewEventPage";
+import { eventAction } from "./components/EventForm";
 
 const router = createBrowserRouter([
   {
@@ -34,12 +34,12 @@ const router = createBrowserRouter([
             // con: delay that looks like nothing is happening --> bad UX
             loader: eventsLoader
           },
-          { path: "new", element: <NewEventPage />, name: "NewEventPage", action: newEventAction },
+          { path: "new", element: <NewEventPage />, name: "NewEventPage", action: eventAction },
           // in order to use one loaders data in multiple components, we can move the loader to the parent route
           {
             path: ":eventID", loader: eventDetailLoader, id: "event-detail", children: [
               { index: true, element: <EventDetailPage />, name: "EventDetailPage", action: deleteEventAction },
-              { path: "edit", element: <EditEventPage />, name: "EditEventPage" }
+              { path: "edit", element: <EditEventPage />, name: "EditEventPage", action: eventAction }
             ]
           },
         ]
