@@ -5,7 +5,8 @@ import HomePage from "./routes/HomePage";
 import EditEventPage from "./routes/NewEventPage";
 import NewEventPage from "./routes/NewEventPage";
 import EventDetailPage from "./routes/EventDetailPage";
-import EventsPage from "./routes/EventsPage";
+import EventsPage, { eventsLoader } from "./routes/EventsPage";
+import { eventDetailLoader } from "./routes/EventDetailPage";
 import EventsRootLayout from "./routes/EventsRoot";
 
 const router = createBrowserRouter([
@@ -20,9 +21,20 @@ const router = createBrowserRouter([
         element: <EventsRootLayout />,
         name: "EventsRoot",
         children: [
-          { index: true, element: <EventsPage />, name: "Events" },
+          {
+            index: true,
+            element: <EventsPage />,
+            name: "Events",
+            // the data returned from loader is now available in all children components of EventsPage but not in higher order like EventsRootLayout
+            // or Siblings like NewEventPage
+            // loaders are executed as soon as we start navigating to the EventsPage
+            // this also means that the visual switch to the tab only happens after the fetching has finished!
+            // benefit: we dont need a loading state
+            // con: delay that looks like nothing is happening --> bad UX
+            loader: eventsLoader
+          },
           { path: "new", element: <NewEventPage />, name: "NewEventPage" },
-          { path: ":eventID", element: <EventDetailPage />, name: "EventDetailPage" },
+          { path: ":eventID", element: <EventDetailPage />, name: "EventDetailPage", loader: eventDetailLoader },
           { path: ":eventID/edit", element: <EditEventPage />, name: "EditEventPage" }
         ]
       }
