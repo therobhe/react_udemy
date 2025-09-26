@@ -39,3 +39,5 @@
 16_1-handling-form-actions/src/.DS_Store
 18-redux/.DS_Store
 19-advanced-redux/.DS_Store
+/22-authentication/backend/node_modules/
+/22-authentication/frontend/node_modules/
