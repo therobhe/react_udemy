@@ -44,3 +44,4 @@
 /23-lazy-loading/node_modules/
 
 package-lock.json
+clean-install-audit.sh
