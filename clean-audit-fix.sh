@@ -1,45 +1,71 @@
 #!/usr/bin/env bash
-
-# Exit immediately if a command fails
 set -e
+
+# Default behavior
+RUN_INSTALL=true
+RUN_AUDIT=true
+
+# Parse command-line flags
+for arg in "$@"; do
+  case $arg in
+    --skip-install)
+      RUN_INSTALL=false
+      shift
+      ;;
+    --skip-audit)
+      RUN_AUDIT=false
+      shift
+      ;;
+    *)
+      ;;
+  esac
+done
 
 echo "🚀 Starting full clean + reinstall + audit fix process..."
 
-# Loop through all subdirectories in the current folder
-for d in */; do
-  # Skip folders without a package.json
-  if [ -f "$d/package.json" ]; then
-    echo "----------------------------------------------"
-    echo "📁 Processing $d"
-    echo "----------------------------------------------"
+# Find all package.json files recursively
+find . -name "package.json" | while read -r pkg; do
+  # Get directory containing package.json
+  dir=$(dirname "$pkg")
 
-    cd "$d"
+  echo "----------------------------------------------"
+  echo "📁 Processing $dir"
+  echo "----------------------------------------------"
 
-    # 1️⃣ Delete node_modules and package-lock.json
-    if [ -d "node_modules" ]; then
-      echo "🧹 Removing node_modules..."
-      rm -rf node_modules
-    fi
+  cd "$dir"
 
-    if [ -f "package-lock.json" ]; then
-      echo "🧹 Removing package-lock.json..."
-      rm -f package-lock.json
-    fi
+  # 1️⃣ Delete node_modules and package-lock.json
+  if [ -d "node_modules" ]; then
+    echo "🧹 Removing node_modules..."
+    rm -rf node_modules
+  fi
 
-    # 2️⃣ Reinstall dependencies
+  if [ -f "package-lock.json" ]; then
+    echo "🧹 Removing package-lock.json..."
+    rm -f package-lock.json
+  fi
+
+  # 2️⃣ Reinstall dependencies (optional)
+  if [ "$RUN_INSTALL" = true ]; then
     echo "📦 Running npm install..."
     npm install
-
-    # 3️⃣ Run npm audit fix --force
-    echo "🛠️  Running npm audit fix --force..."
-    npm audit fix --force || true  # don't stop on audit errors
-
-    # Back to root
-    cd ..
-
-    echo "✅ Done with $d"
-    echo
+  else
+    echo "⚠️  Skipping npm install"
   fi
+
+  # 3️⃣ Run npm audit fix --force (optional)
+  if [ "$RUN_AUDIT" = true ]; then
+    echo "🛠️  Running npm audit fix --force..."
+    npm audit fix --force || true
+  else
+    echo "⚠️  Skipping npm audit fix"
+  fi
+
+  # Return to the root
+  cd - > /dev/null
+
+  echo "✅ Done with $dir"
+  echo
 done
 
 echo "🎉 All subprojects processed successfully!"
