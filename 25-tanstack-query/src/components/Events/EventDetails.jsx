@@ -4,6 +4,8 @@ import Header from '../Header.jsx';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { fetchEventById, deleteEventById, queryClient } from '../../util/http.js';
 import { useNavigate } from 'react-router-dom';
+import LoadingIndicator from '../UI/LoadingIndicator.jsx';
+import ErrorBlock from '../UI/ErrorBlock.jsx';
 
 export default function EventDetails() {
   // use useParams in order to grab the id
@@ -20,9 +22,15 @@ export default function EventDetails() {
   const { mutate, isPending: isDeleting, isError: isDeleteError } = useMutation({
     mutationFn: () => deleteEventById({ eventId: id }),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['events'], exact: false });
+      queryClient.invalidateQueries({
+        queryKey: ['events'],
+        exact: false,
+        refetchType: 'none'
+      }
+      );
       navigate('../')
     }
+
   });
 
   const handleDelete = () => {
@@ -38,9 +46,9 @@ export default function EventDetails() {
         </Link>
       </Header>
       <article id="event-details">
-        {isPending || isDeleting && <p>Loading...</p>}
-        {isError && <p>Error loading event details.</p>}
-        {isDeleteError && <p>Error deleting event.</p>}
+        {(isPending || isDeleting) && <LoadingIndicator />}
+        {isError && <ErrorBlock title="An error occurred" message="Failed to load event details." />}
+        {isDeleteError && <ErrorBlock title="An error occurred" message="Failed to delete event." />}
         {data && (
           <>
             <header>
