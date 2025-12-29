@@ -1,8 +1,8 @@
-import { useQuery } from '@tanstack/react-query'
+import { useQuery } from "@tanstack/react-query";
 
-import LoadingIndicator from '../UI/LoadingIndicator.jsx';
-import ErrorBlock from '../UI/ErrorBlock.jsx';
-import EventItem from './EventItem.jsx';
+import LoadingIndicator from "../UI/LoadingIndicator.jsx";
+import ErrorBlock from "../UI/ErrorBlock.jsx";
+import EventItem from "./EventItem.jsx";
 import { fetchEvents } from "../../util/http.js";
 
 export default function NewEventsSection() {
@@ -11,7 +11,7 @@ export default function NewEventsSection() {
   // but on all other renders, it first shows the data from the cache --> in the background executes the fetch again --> updates data if diff registered
   const {data, isPending, isError, error} = useQuery({
     queryKey: ['events'], // define a key that is used for caching
-    queryFn: fetchEvents, // define a promise that runs the http request
+    queryFn: fetchEvents, // define a promise that runs the http request, automatically passes some args to the function like signal for aborting request and queryKey!
     staleTime: 3000, // do not refetch query if the component is called within 3 seconds
     gcTime: 60000 // lifetime of the cache - 1 minute
   })
