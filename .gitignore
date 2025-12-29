@@ -46,3 +46,4 @@
 package-lock.json
 clean-install-audit.sh
 /25-tanstack-query/node_modules/
+/25-tanstack-query/backend/node_modules/
