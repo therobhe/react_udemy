@@ -1,12 +1,14 @@
 import { Link, Outlet, useParams } from 'react-router-dom';
 
 import Header from '../Header.jsx';
-import { useQuery } from '@tanstack/react-query';
-import { fetchEventById } from '../../util/http.js';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import { fetchEventById, deleteEventById, queryClient } from '../../util/http.js';
+import { useNavigate } from 'react-router-dom';
 
 export default function EventDetails() {
   // use useParams in order to grab the id
   const { id } = useParams();
+  const navigate = useNavigate();
 
   // use useQuery in order to fetch the event with the id
   const { data, isPending, isError } = useQuery({
@@ -15,8 +17,17 @@ export default function EventDetails() {
   });
 
   // use useMutation in order to handle delete operation with id
+  const { mutate, isPending: isDeleting, isError: isDeleteError } = useMutation({
+    mutationFn: () => deleteEventById({ eventId: id }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['events'], exact: false });
+      navigate('../')
+    }
+  });
 
-  console.log("DATA: ", data);
+  const handleDelete = () => {
+    mutate();
+  }
 
   return (
     <>
@@ -27,14 +38,15 @@ export default function EventDetails() {
         </Link>
       </Header>
       <article id="event-details">
-        {isPending && <p>Loading...</p>}
+        {isPending || isDeleting && <p>Loading...</p>}
         {isError && <p>Error loading event details.</p>}
+        {isDeleteError && <p>Error deleting event.</p>}
         {data && (
           <>
             <header>
               <h1>{data?.title}</h1>
               <nav>
-                <button>Delete</button>
+                <button onClick={handleDelete}>Delete</button>
                 <Link to="edit">Edit</Link>
               </nav>
             </header>
