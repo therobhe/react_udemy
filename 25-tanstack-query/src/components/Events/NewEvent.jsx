@@ -1,6 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
-import { createNewEvent } from '../../util/http.js';
+import { createNewEvent, queryClient } from '../../util/http.js';
 
 import Modal from '../UI/Modal.jsx';
 import EventForm from './EventForm.jsx';
@@ -11,6 +11,13 @@ export default function NewEvent() {
   // destructure mutate function from the useMutation hook in order to call the update operation on form submit
   const { mutate, isPending, isError, error } = useMutation({
     mutationFn: createNewEvent,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['events'], exact: false }); // invalidate all queries with the word 'events' so that all matching queries are refetched next time they are used
+      navigate('../');
+    },
+    onError: (error) => {
+      console.error('Error creating event:', error);
+    }
   });
 
   function handleSubmit(formData) {
