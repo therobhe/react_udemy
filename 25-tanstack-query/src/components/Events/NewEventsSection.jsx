@@ -9,7 +9,7 @@ export default function NewEventsSection() {
   // use Tanstack hook in order to send the http request to our backend
   // every time the component renders, the hook is executed. So for 1st visit, it actually fetches data and stores the request with the key "events"
   // but on all other renders, it first shows the data from the cache --> in the background executes the fetch again --> updates data if diff registered
-  const {data, isPending, isError, error} = useQuery({
+  const { data, isPending, isError, error } = useQuery({
     queryKey: ['events'], // define a key that is used for caching
     queryFn: fetchEvents, // define a promise that runs the http request, automatically passes some args to the function like signal for aborting request and queryKey!
     staleTime: 3000, // do not refetch query if the component is called within 3 seconds

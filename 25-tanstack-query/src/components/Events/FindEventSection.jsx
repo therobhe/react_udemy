@@ -7,11 +7,13 @@ import EventItem from "./EventItem.jsx";
 
 export default function FindEventSection() {
   const searchElement = useRef();
-  const [searchTerm, setSearchTerm] = useState('')
+  const [searchTerm, setSearchTerm] = useState()
 
-  const {data, isPending, isError} = useQuery({
-    queryKey: ['events', {search: searchTerm}], // key must differ from the one used in NewEventsSection.jsx -> dynamic key based on the searchTerm
-    queryFn: ({signal}) => fetchEvents({signal, searchTerm})
+  // is loading will not be true if search term is disabled --> prevents showing loading indicator on initial render
+  const { data, isPending, isLoading, isError } = useQuery({
+    queryKey: ['events', { search: searchTerm }], // key must differ from the one used in NewEventsSection.jsx -> dynamic key based on the searchTerm
+    queryFn: ({ signal }) => fetchEvents({ signal, searchTerm }),
+    enabled: searchTerm !== undefined // only execute the query if there is a search term --> prevents fetching all events twice on initial render
   })
 
   function handleSubmit(event) {
@@ -21,11 +23,11 @@ export default function FindEventSection() {
 
   let content = <p>Please enter a search term to find events</p>
 
-  if(isPending) content = <LoadingIndicator />
+  if (isLoading) content = <LoadingIndicator />
 
-  if(isError) content = <ErrorBlock title="An error occurred" message={error.info?.message || "Failed to fetch Events."} />
+  if (isError) content = <ErrorBlock title="An error occurred" message={error.info?.message || "Failed to fetch Events."} />
 
-  if(data) content = <ul className="events-list">
+  if (data) content = <ul className="events-list">
     {data.map(event => <li key={event.id}><EventItem event={event} /></li>)}
   </ul>
 
