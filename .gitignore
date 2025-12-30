@@ -47,3 +47,5 @@ package-lock.json
 clean-install-audit.sh
 /25-tanstack-query/node_modules/
 /25-tanstack-query/backend/node_modules/
+/26-nextjs/.next/
+/26-nextjs/node_modules/

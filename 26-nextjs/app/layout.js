@@ -1,4 +1,5 @@
-import './globals.css'
+import "./globals.css";
+import { MainNavigation } from "@/components/MainNavigation";
 
 export const metadata = {
   title: 'NextJS Course App',
@@ -8,7 +9,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <MainNavigation />
+        {children}
+      </body>
     </html>
   );
 }
