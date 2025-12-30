@@ -5,7 +5,7 @@ import { notFound } from 'next/dist/client/components/not-found'
 
 export default async function SlugPage({params}) {
 	const { slug } = await params;
-	const meal = await getMeal(slug) // .slug is because this is the placeholder in the folder structure
+	const meal = await getMeal(slug) // slug is because this is the placeholder in the folder structure
 	
 	if(!meal) {
 		notFound()
