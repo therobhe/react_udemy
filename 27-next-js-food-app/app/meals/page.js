@@ -1,9 +1,11 @@
 import Link from 'next/link'
 import { Suspense } from 'react'
+
 import classes from './page.module.css'
 import MealsGrid from '@/components/meals/meals-grid'
 import { getMeals } from '@/lib/meals'
 
+/* Special to RSC: they can be async in contrast to client side components */
 const Meals = async() => {
 	// db connect & data fetch
 	const meals = await getMeals();
@@ -13,7 +15,6 @@ const Meals = async() => {
 	)
 }
 
-/* Special to RSC: they can be async in contrast to client side components */
 export default function MealsPage() {
 	return (
 		<>
