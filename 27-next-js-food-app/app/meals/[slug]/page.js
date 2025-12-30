@@ -1,10 +1,18 @@
 import classes from './page.module.css'
 import { getMeal } from '@/lib/meals'
 import Image from 'next/image'
+import { notFound } from 'next/dist/client/components/not-found'
 
 export default async function SlugPage({params}) {
-	const meal = await getMeal(params.slug) // .slug is because this is the placeholder in the folder structure
+	const { slug } = await params;
+	const meal = await getMeal(slug) // .slug is because this is the placeholder in the folder structure
+	
+	if(!meal) {
+		notFound()
+	}
+	
 	meal.instructions = meal.instructions.replace(/\n/g, '<br />')
+	
 	
 	return (
 		<>
