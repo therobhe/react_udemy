@@ -25,3 +25,7 @@ There are many good practices for organizing Next.JS projects:
 - an `ìcon.png` in the root of the /app folder will be used as favicon.
 - `globals.css` in the root of the /app folder will be used as global style.
 - dynamic routes (e.g. different blog posts) can be created like this `/blog/[slug]`
+
+### Client Components
+
+- it is beneficial to keep client components as far down as possible in the tree in order to keep most part serverside
