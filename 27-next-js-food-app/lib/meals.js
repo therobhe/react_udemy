@@ -11,3 +11,8 @@ throw new Error('Something went wrong');
 */
 	return db.prepare('SELECT * FROM meals').all();
 }
+
+/* writing it with ? is a security mechanism against sqlInjection since sqlite protects these cases */
+export async function getMeal(slug) {
+	return db.prepare('SELECT * FROM meals WHERE slug = ?').get(slug);
+}
