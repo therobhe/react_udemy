@@ -8,10 +8,10 @@ export const MainNavigation = () => {
                     <Link href="/">Home</Link>
                 </li>
                 <li>
-                    <Link href="/pages/about">About</Link>
+                    <Link href="/about">About</Link>
                 </li>
                 <li>
-                    <Link href="/pages/contact">Contact</Link>
+                    <Link href="/contact">Contact</Link>
                 </li>
             </ul>
         </nav>
