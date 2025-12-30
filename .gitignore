@@ -49,3 +49,4 @@ clean-install-audit.sh
 /25-tanstack-query/backend/node_modules/
 /26-nextjs/.next/
 /26-nextjs/node_modules/
+/27-next-js-food-app/node_modules/
