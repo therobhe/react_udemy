@@ -1,4 +1,4 @@
-import Link from "next/link"
+import Link from "next/link";
 
 export const MainNavigation = () => {
     return (
@@ -8,12 +8,14 @@ export const MainNavigation = () => {
                     <Link href="/">Home</Link>
                 </li>
                 <li>
-                    <Link href="/about">About</Link>
+                    <Link href="/pages/about">About</Link>
                 </li>
                 <li>
-                    <Link href="/contact">Contact</Link>
+                    <Link href="/pages/contact">Contact</Link>
                 </li>
             </ul>
         </nav>
     )
 }
+
+export default MainNavigation;

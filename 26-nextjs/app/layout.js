@@ -1,5 +1,5 @@
 import "./globals.css";
-import { MainNavigation } from "@/components/MainNavigation";
+import MainNavigation from "./_components/MainNavigation";
 
 export const metadata = {
   title: 'NextJS Course App',
