@@ -1,7 +1,13 @@
+import ImageSlideshow from '@/components/images/image-slideshow'
 import Link from 'next/link'
 
 import classes from './page.module.css'
-import ImageSlideshow from '@/components/images/image-slideshow'
+
+/* this meta data overrides the metadata object from the root layout.js */
+export const metadata = {
+  title: 'All Meals',
+  description: 'Discover all the delicious recipes.',
+};
 
 export default function Home() {
   return (

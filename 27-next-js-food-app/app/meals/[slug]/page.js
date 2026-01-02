@@ -1,9 +1,26 @@
-import classes from './page.module.css'
 import { getMeal } from '@/lib/meals'
-import Image from 'next/image'
 import { notFound } from 'next/dist/client/components/not-found'
+import Image from 'next/image'
+import classes from './page.module.css'
 
-export default async function SlugPage({params}) {
+/*
+* dynamic meta: use this function for accessing params
+* returns the metadata object
+* */
+export async function generateMetadata({ params }) {
+	const meal = await getMeal(params.slug)
+	
+	if(!meal) {
+		notFound()
+	}
+	
+	return {
+		title: meal.title,
+		desscription: meal.summary
+	}
+}
+
+export default async function SlugPage({ params }) {
 	const { slug } = await params;
 	const meal = await getMeal(slug) // slug is because this is the placeholder in the folder structure
 	
