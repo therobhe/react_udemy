@@ -1,9 +1,7 @@
 "use server"
 
 import { saveMeal } from '@/lib/meals'
-import {
-	revalidatePath
-} from 'next/dist/server/web/spec-extension/revalidate.js'
+import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 
 function isInvalidText(text) {
