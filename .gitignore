@@ -53,3 +53,5 @@ clean-install-audit.sh
 /27-next-js-food-app/.next/
 /27-next-js-food-app/meals.db
 /28-rsc/node_modules/
+/28-rsc/.next/
+/28-rsc/node_modules/
