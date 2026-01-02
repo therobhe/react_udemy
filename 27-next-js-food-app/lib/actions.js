@@ -1,6 +1,7 @@
 "use server"
 
 import { saveMeal } from '@/lib/meals'
+import { redirect } from 'next/navigation'
 
 /*
 * use server makes sure that the function is only executed on the server
@@ -17,4 +18,5 @@ export async function shareMeal(formData) {
 		creator_email: formData.get('email')
 	}
 	await saveMeal(meal)
+	redirect('/meals')
 }
