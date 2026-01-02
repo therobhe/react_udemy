@@ -13,7 +13,6 @@ export default async function SlugPage({params}) {
 	
 	meal.instructions = meal.instructions.replace(/\n/g, '<br />')
 	
-	
 	return (
 		<>
 			<header className={classes.header}>
