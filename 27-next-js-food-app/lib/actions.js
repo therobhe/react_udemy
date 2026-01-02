@@ -1,6 +1,9 @@
 "use server"
 
 import { saveMeal } from '@/lib/meals'
+import {
+	revalidatePath
+} from 'next/dist/server/web/spec-extension/revalidate.js'
 import { redirect } from 'next/navigation'
 
 function isInvalidText(text) {
@@ -39,5 +42,6 @@ export async function shareMeal(prevState, formData) {
 	
 	/* call save to db function */
 	await saveMeal(meal)
+	revalidatePath('/meals', 'layout') // throw away the cache for the meals route. Since layout wraps all subroutes, all caches in the route are invalidated
 	redirect('/meals')
 }
