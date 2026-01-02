@@ -1,5 +1,7 @@
 "use server"
 
+import { saveMeal } from '@/lib/meals'
+
 /*
 * use server makes sure that the function is only executed on the server
 * assigning this function to the forms action prop makes it automatically gather the formData
@@ -14,6 +16,5 @@ export async function shareMeal(formData) {
 		creator: formData.get('name'),
 		creator_email: formData.get('email')
 	}
-	
-	console.log(meal)
+	await saveMeal(meal)
 }
